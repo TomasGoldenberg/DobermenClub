@@ -31,11 +31,11 @@ export default function LandingPage() {
   return (
     <RootStyle title="DobermenClub | NFT COLLECTION" id="move_top">
       <LandingHero />
-      {window.screen.width < 600 && (
-        <PhotoSection image="https://i.ibb.co/z4jTcdC/DOBER-girl-face-02-Artboard-4.png" />
-      )}
 
       <ContentStyle>
+        {window.screen.width < 600 && (
+          <PhotoSection image="https://i.ibb.co/z4jTcdC/DOBER-girl-face-02-Artboard-4.png" />
+        )}
         <MintCountDown />
         <PhotoSection image="https://i.ibb.co/Mh6S0QF/1882-01-Artboard-2-2.png" />
         {window.screen.width > 600 && <LandingAdvertisement />}
