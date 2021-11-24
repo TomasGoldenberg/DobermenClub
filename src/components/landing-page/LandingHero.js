@@ -76,114 +76,15 @@ export default function LandingHero() {
       <RootStyle initial="initial" animate="animate" variants={varWrapEnter}>
         <HeroOverlayStyle
           alt="overlay"
-          src="/static/home/overlay.svg"
+          src="https://i.ibb.co/z4jTcdC/DOBER-girl-face-02-Artboard-4.png"
           variants={varFadeIn}
         />
-
+        {/* 
         <HeroImgStyle
           alt="hero"
-          src="/static/home/hero.png"
+          src="https://lh3.googleusercontent.com/RrolBh5kf4MX9HDOC3LDzegwkJlxlf5Rat-5UbeRKZOg8zLSyZvvCKRinBEtVCKSTCerrlZMitqWF35NBQrKlLHeouXbUB22bwY3yg=h600"
           variants={varFadeInUp}
-        />
-
-        <Container maxWidth="lg">
-          <ContentStyle>
-            <motion.div variants={varFadeInRight}>
-              <Typography variant="h1" sx={{ color: 'common.white' }}>
-                Start a <br />
-                New Project <br /> with
-                <Typography
-                  component="span"
-                  variant="h1"
-                  sx={{ color: 'primary.main' }}
-                >
-                  &nbsp;Minimal
-                </Typography>
-              </Typography>
-            </motion.div>
-
-            <motion.div variants={varFadeInRight}>
-              <Typography sx={{ py: 5, color: 'common.white' }}>
-                The starting point for your next project based on
-                easy-to-customize Material-UI © helps you build apps faster and
-                better.
-              </Typography>
-            </motion.div>
-
-            <Box
-              component={motion.div}
-              variants={varFadeInRight}
-              sx={{
-                mb: 5,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: { xs: 'center', md: 'flex-start' }
-              }}
-            >
-              <Box
-                component="img"
-                alt="sketch icon"
-                src="/static/icons/ic_sketch.svg"
-                sx={{ mr: 1, width: 20, height: 20 }}
-              />
-              <Link
-                color="inherit"
-                underline="always"
-                href={PATH_HOME.cloud}
-                target="_blank"
-                sx={{ color: 'common.white' }}
-              >
-                Preview in Sketch Cloud
-              </Link>
-            </Box>
-
-            <motion.div variants={varFadeInRight}>
-              <Button
-                size="large"
-                variant="contained"
-                component={RouterLink}
-                to={PATH_DASHBOARD.root}
-                startIcon={<Icon icon={flashFill} width={20} height={20} />}
-              >
-                Live Preview
-              </Button>
-            </motion.div>
-
-            <Box
-              sx={{
-                mt: 5,
-                display: 'flex',
-                justifyContent: { xs: 'center', md: 'flex-start' },
-                '& > :not(:last-of-type)': { mr: 1.5 }
-              }}
-            >
-              <motion.img
-                variants={varFadeInRight}
-                src="/static/icons/ic_m_sketch.svg"
-              />
-              <motion.img
-                variants={varFadeInRight}
-                src="/static/icons/ic_m_figma.svg"
-              />
-              <motion.img
-                variants={varFadeInRight}
-                src="/static/icons/ic_m_material.svg"
-              />
-              <motion.img
-                variants={varFadeInRight}
-                src="/static/icons/ic_m_react.svg"
-              />
-              <motion.img
-                variants={varFadeInRight}
-                src="/static/icons/ic_m_js.svg"
-              />
-              <motion.img
-                variants={varFadeInRight}
-                src="/static/icons/ic_m_ts.svg"
-              />
-            </Box>
-          </ContentStyle>
-        </Container>
+        /> */}
       </RootStyle>
       <Box sx={{ height: { md: '100vh' } }} />
     </>

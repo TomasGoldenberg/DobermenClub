@@ -5,11 +5,12 @@ import Page from '../components/Page';
 import {
   LandingHero,
   LandingFooter,
-  LandingMinimal,
+  MintCountDown,
   LandingDarkMode,
   LandingAdvertisement,
-  LandingCleanInterfaces,
-  LandingHugePackElements
+  LandingRoadmap,
+  LandingHugePackElements,
+  PhotoSection
 } from '../components/landing-page';
 
 // ----------------------------------------------------------------------
@@ -28,17 +29,25 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 export default function LandingPage() {
   return (
-    <RootStyle
-      title="The starting point for your next project | Minimal-UI"
-      id="move_top"
-    >
+    <RootStyle title="DobermenClub | NFT COLLECTION" id="move_top">
       <LandingHero />
+      {window.screen.width < 600 && (
+        <PhotoSection image="https://i.ibb.co/z4jTcdC/DOBER-girl-face-02-Artboard-4.png" />
+      )}
+
       <ContentStyle>
-        <LandingMinimal />
+        <MintCountDown />
+        <PhotoSection image="https://i.ibb.co/Mh6S0QF/1882-01-Artboard-2-2.png" />
+        {window.screen.width > 600 && <LandingAdvertisement />}
+        <LandingRoadmap />
+
         <LandingHugePackElements />
         <LandingDarkMode />
-        <LandingCleanInterfaces />
-        <LandingAdvertisement />
+        <PhotoSection
+          hasButton
+          link="https://discord.com/invite/z3PbKfPwHh/"
+          image="https://i.ibb.co/kXtjtGb/2847-01-Artboard-25.png"
+        />
         <LandingFooter />
       </ContentStyle>
     </RootStyle>

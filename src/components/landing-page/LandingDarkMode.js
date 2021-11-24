@@ -1,6 +1,6 @@
 // material
 import { experimentalStyled as styled } from '@material-ui/core/styles';
-import { Box, Grid, Container, Typography, Switch } from '@material-ui/core';
+import { Box, Grid, Button, Typography, Switch } from '@material-ui/core';
 // hooks
 import useSettings from '../../hooks/useSettings';
 //
@@ -19,13 +19,9 @@ const RootStyle = styled('div')(({ theme }) => ({
 }));
 
 const ContentStyle = styled('div')(({ theme }) => ({
-  textAlign: 'center',
-  position: 'relative',
-  marginBottom: theme.spacing(10),
-  [theme.breakpoints.up('md')]: {
-    height: '100%',
-    marginBottom: 0,
-    textAlign: 'left',
+  display: 'flex',
+  [theme.breakpoints.down('sm')]: {
+    marginLeft: '20px',
     display: 'inline-flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -34,82 +30,71 @@ const ContentStyle = styled('div')(({ theme }) => ({
 }));
 
 // ----------------------------------------------------------------------
-
 export default function LandingDarkMode() {
-  const { themeMode, toggleMode } = useSettings();
-  const isLight = themeMode === 'light';
-
+  const MEMBERS = [
+    {
+      image:
+        'https://lh3.googleusercontent.com/YUGMBvzKzvfVYvYEJHGf8X65G-MSTq9Td5AE0LExL_aLGrD21VvySTQ_VM5dJ-tR1a6D83R-WIAb-1DLit9-8s-B960YQcsiroSD',
+      name: 'DOBER JOE',
+      role: 'Co-Founder & Engineer'
+    },
+    {
+      image:
+        'https://lh3.googleusercontent.com/PxJyHDXVeFkWBzALxELUcel8Yb8T2BKfNe1jFjg_zFvxXet9vqbml7sogGK-MrEg4rPXA_9FSMIj-_f0zEhBMHbDkS2pAjNbSW2E',
+      name: 'DOBER MARK',
+      role: 'Co-Founder & Crypto artist'
+    },
+    {
+      image:
+        'https://lh3.googleusercontent.com/zESOghg2kSHHNU4KN9D5yaEMYmybHWa7tp5EeRTG6CEVwQMs9uW6LkdW_kQ8PQq9UPAKwbnZbXSN8pGFqmsZni1xNS2nMLb3PLHY',
+      name: 'DOBER KAREEM',
+      role: 'Art Director'
+    },
+    {
+      image:
+        'https://lh3.googleusercontent.com/0AApKfunbYZVIWQH-cCXSp13dI0ZK78q6fm5K6hb0dVvp8kUqxseEqoaIK1AtB05oaQZ0-J80RaUYSVMGlKvSJnPlMBa1I7xPqby5w',
+      name: 'DOBER PAUL',
+      role: 'Marketing'
+    }
+  ];
   return (
-    <RootStyle>
-      <Container maxWidth="lg" sx={{ position: 'relative' }}>
-        <Box
-          component="img"
-          alt="image shape"
-          src="/static/home/shape.svg"
-          sx={{
-            top: 0,
-            right: 0,
-            bottom: 0,
-            my: 'auto',
-            position: 'absolute',
-            filter: 'grayscale(1) opacity(48%)',
-            display: { xs: 'none', md: 'block' }
-          }}
-        />
-
-        <Grid container spacing={5} direction="row-reverse">
-          <Grid item xs={12} md={4}>
-            <ContentStyle>
-              <MotionInView variants={varFadeInUp}>
+    <RootStyle id="faq">
+      <ContentStyle container style={{}}>
+        {MEMBERS.map((member, index) => (
+          <Grid
+            key={index}
+            style={{
+              objectFit: 'cover'
+            }}
+          >
+            <img src={member.image} alt="member" height="316" />
+            <Button
+              variant="contained"
+              style={{
+                width: '317px',
+                borderRadius: '0px',
+                height: '90px'
+              }}
+            >
+              <Box style={{ display: 'flex', flexDirection: 'column' }}>
                 <Typography
-                  gutterBottom
-                  variant="overline"
-                  sx={{ color: 'text.disabled', display: 'block' }}
+                  style={{ fontWeight: 'bold' }}
+                  variant="h3"
+                  paragraph
                 >
-                  Easy switch between styles.
+                  {member.name}
                 </Typography>
-              </MotionInView>
-
-              <MotionInView
-                variants={varFadeInUp}
-                sx={{ color: 'common.white' }}
-              >
-                <Typography variant="h2" paragraph>
-                  Dark Mode
+                <Typography
+                  variant="overline"
+                  sx={{ color: 'text.primary', display: 'block' }}
+                >
+                  {member.role}
                 </Typography>
-              </MotionInView>
-
-              <MotionInView
-                variants={varFadeInUp}
-                sx={{ color: 'common.white', mb: 5 }}
-              >
-                <Typography>
-                  A dark theme that feels easier on the eyes.
-                </Typography>
-              </MotionInView>
-
-              <MotionInView variants={varFadeInRight}>
-                <Switch onChange={toggleMode} checked={!isLight} />
-              </MotionInView>
-            </ContentStyle>
+              </Box>
+            </Button>
           </Grid>
-
-          <Grid item xs={12} md={8}>
-            <MotionInView variants={varFadeInLeft}>
-              <Box
-                component="img"
-                alt="theme mode"
-                src={`/static/home/${isLight ? 'light' : 'dark'}mode.png`}
-                sx={{
-                  maxWidth: { md: 'calc(100% - 48px)' },
-                  transform: 'translateZ(0)',
-                  filter: 'drop-shadow(-80px 80px 120px #000000)'
-                }}
-              />
-            </MotionInView>
-          </Grid>
-        </Grid>
-      </Container>
+        ))}
+      </ContentStyle>
     </RootStyle>
   );
 }

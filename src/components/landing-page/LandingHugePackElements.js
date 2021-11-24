@@ -1,55 +1,28 @@
 import { Link as RouterLink } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import Carousel from 'react-material-ui-carousel';
+
 // material
 import {
   alpha,
   useTheme,
   experimentalStyled as styled
 } from '@material-ui/core/styles';
-import {
-  Box,
-  Grid,
-  Button,
-  Container,
-  Typography,
-  useMediaQuery
-} from '@material-ui/core';
+import { Box, Grid, Button, Container, useMediaQuery } from '@material-ui/core';
 //
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import { CardActionArea } from '@mui/material';
+import { getCollectionAssets } from '../../api/opensea';
+import { DOBERMEN_ADDRESS, DOBERMEN_SLUG } from '../../config';
 import { varFadeInUp, MotionInView, varFadeInRight } from '../animate';
-
 // ----------------------------------------------------------------------
-
-const RootStyle = styled('div')(({ theme }) => ({
-  padding: theme.spacing(15, 0),
-  backgroundImage:
-    theme.palette.mode === 'light'
-      ? `linear-gradient(180deg, ${alpha(theme.palette.grey[300], 0)} 0%, ${
-          theme.palette.grey[300]
-        } 100%)`
-      : 'none'
-}));
-
-const ContentStyle = styled('div')(({ theme }) => ({
-  maxWidth: 520,
-  margin: 'auto',
-  textAlign: 'center',
-  marginBottom: theme.spacing(10),
-  [theme.breakpoints.up('md')]: {
-    height: '100%',
-    marginBottom: 0,
-    textAlign: 'left',
-    display: 'inline-flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    paddingRight: theme.spacing(5)
-  }
-}));
-
-const ScreenStyle = styled(MotionInView)({
-  bottom: 0,
-  maxWidth: 460,
-  position: 'absolute'
-});
 
 const variantScreenLeftMoblie = {
   initial: { x: '22%', y: -10, opacity: 0 },
@@ -73,9 +46,16 @@ const variantScreenRight = {
 };
 
 // ----------------------------------------------------------------------
+const CarrouselStyledMini = styled(Carousel)(({ theme }) => ({
+  width: '100%',
+  marginTop: '150px'
+}));
 
 export default function LandingHugePackElements() {
+  const [assets, setAssets] = useState([]);
+  const [expanded, setExpanded] = useState(false);
   const theme = useTheme();
+
   const isLight = theme.palette.mode === 'light';
   const isRTL = theme.direction === 'rtl';
   const upSm = useMediaQuery(theme.breakpoints.up('sm'));
@@ -88,97 +68,175 @@ export default function LandingHugePackElements() {
     ? variantScreenRight
     : variantScreenRightMobile;
 
+  useEffect(() => {
+    const getAssets = async () => {
+      const assets = await getCollectionAssets(
+        DOBERMEN_ADDRESS,
+        DOBERMEN_SLUG,
+        '40'
+      );
+      setAssets(assets);
+    };
+    getAssets();
+  }, []);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
   return (
-    <RootStyle>
-      <Container maxWidth="lg">
-        <Grid container spacing={5}>
-          <Grid item xs={12} md={4} lg={5}>
-            <ContentStyle>
-              <MotionInView variants={textAnimate}>
-                <Typography
-                  gutterBottom
-                  variant="overline"
-                  sx={{ color: 'text.secondary', display: 'block' }}
-                >
-                  Interface Starter Kit
-                </Typography>
-              </MotionInView>
-
-              <MotionInView variants={textAnimate}>
-                <Typography variant="h2" paragraph>
-                  Huge Pack of Elements
-                </Typography>
-              </MotionInView>
-
-              <MotionInView variants={textAnimate}>
-                <Typography sx={{ color: 'text.secondary' }}>
-                  We collected most popular elements. Menu, sliders, buttons,
-                  inputs etc. are all here. Just dive in!
-                </Typography>
-              </MotionInView>
-
-              <MotionInView variants={textAnimate} sx={{ mt: 5 }}>
-                <Button
-                  size="large"
-                  color="inherit"
-                  variant="outlined"
-                  component={RouterLink}
-                  to="#"
-                >
-                  View All Components
-                </Button>
-              </MotionInView>
-            </ContentStyle>
-          </Grid>
-
-          <Grid
-            dir="ltr"
-            item
-            xs={12}
-            md={8}
-            lg={7}
-            sx={{
-              position: 'relative',
-              pl: { sm: '16% !important', md: '0 !important' }
-            }}
+    <Grid
+      item
+      xs={12}
+      style={{
+        display: 'flex',
+        padding: '30px',
+        flexDirection: upSm ? 'row' : 'column'
+      }}
+    >
+      <Grid xs={12} sm={12} md={6}>
+        <MotionInView variants={textAnimate}>
+          <Typography
+            gutterBottom
+            variant="overline"
+            sx={{ color: 'text.secondary', display: 'block' }}
           >
-            {[...Array(3)].map((screen, index) => (
-              <ScreenStyle
-                key={index}
-                threshold={0.72}
-                variants={{
-                  ...(index === 0 && screenLeftAnimate),
-                  ...(index === 1 && screenCenterAnimate),
-                  ...(index === 2 && screenRightAnimate)
-                }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-                sx={{
-                  ...(index === 0 && { zIndex: 3 }),
-                  ...(index === 2 && { zIndex: 1 }),
-                  ...(index === 1 && {
-                    position: 'relative',
-                    zIndex: 2,
-                    bottom: { xs: 20, sm: 40 },
-                    transform: {
-                      xs: isRTL ? 'translateX(-24%)' : 'translateX(24%)',
-                      sm: isRTL ? 'translateX(-32%)' : 'translateX(32%)'
-                    }
-                  })
-                }}
-              >
-                <Box
+            GALLERY
+          </Typography>
+        </MotionInView>
+
+        <MotionInView variants={textAnimate}>
+          <Typography variant="h2" paragraph>
+            DOBERMEN CLUB MEMBERS
+          </Typography>
+        </MotionInView>
+
+        <CarrouselStyledMini>
+          {assets.map((asset, index) => (
+            <Card
+              key={index}
+              style={{
+                height: '400px'
+              }}
+            >
+              <CardActionArea>
+                <CardMedia
                   component="img"
-                  alt={`screen ${index + 1}`}
-                  src={`/static/home/screen_${isLight ? 'light' : 'dark'}_${
-                    index + 1
-                  }.png`}
-                  sx={{ width: { xs: '80%', sm: '100%' } }}
+                  height="300"
+                  image={asset.image_preview_url}
+                  alt="green iguana"
                 />
-              </ScreenStyle>
-            ))}
-          </Grid>
-        </Grid>
-      </Container>
-    </RootStyle>
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {asset.name}
+                  </Typography>
+                  {/*  <Typography variant="body2" color="text.secondary">
+                    Minted at {asset?.sell_orders[0]?.created_date.slice(0, 10)}
+                  </Typography> */}
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          ))}
+        </CarrouselStyledMini>
+      </Grid>
+      <Grid xs={12} sm={12} md={12} sx={{ pl: upSm ? 10 : 0 }}>
+        <MotionInView variants={textAnimate}>
+          <Typography
+            gutterBottom
+            variant="overline"
+            sx={{ color: 'text.secondary', display: 'block' }}
+          >
+            FAQ
+          </Typography>
+        </MotionInView>
+
+        <MotionInView variants={textAnimate}>
+          <Typography variant="h2" paragraph>
+            FREQUENT QUESTIONS
+          </Typography>
+        </MotionInView>
+
+        <div style={{ marginTop: upSm ? '210px' : '25px' }}>
+          <Accordion
+            expanded={expanded === 'panel1'}
+            onChange={handleChange('panel1')}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography>How to Buy a DOBER</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                In our opensea collection
+                https://opensea.io/collection/thedobermenclub/. Connect your
+                wallet/account / Select your favorite DOBER / Click Buy Now /
+                Select payment method{' '}
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === 'panel2'}
+            onChange={handleChange('panel2')}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2bh-content"
+              id="panel2bh-header"
+            >
+              <Typography>Why buy a DOBER</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                By Holding DOBER NFT you are going to be the owner of a part of
+                our uprising price collection. The DOBER Asset floor price is
+                always increasing its value. We are currently on pre-sale so our
+                prices are low. And its a good oportunity to buy a DOBER that is
+                going to be a avatar in our PLAY 2 EARN Future game
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === 'panel3'}
+            onChange={handleChange('panel3')}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel3bh-content"
+              id="panel3bh-header"
+            >
+              <Typography>How giveaways work ?</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                If you Own a DOBER you are already whitelisted, If you dont,
+                each giveaway is presented at our social media with its
+                requisites ! When the totality of the collection has been
+                minted, we gonna giveaway 2 Teslas !
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === 'panel4'}
+            onChange={handleChange('panel4')}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel4bh-content"
+              id="panel4bh-header"
+            >
+              <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                Any trouble ?
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>Contact us at dobermenclub@gmail.com.</Typography>
+            </AccordionDetails>
+          </Accordion>
+        </div>
+      </Grid>
+    </Grid>
   );
 }
