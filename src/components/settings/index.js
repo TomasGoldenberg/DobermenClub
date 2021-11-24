@@ -4,6 +4,7 @@ import closeFill from '@iconify/icons-eva/close-fill';
 // material
 import { Box, Drawer, Tooltip, Divider, Typography } from '@material-ui/core';
 //
+import { FaDiscord, FaInstagram } from 'react-icons/fa';
 import { MIconButton, MFab } from '../@material-extend';
 import SettingMode from './SettingMode';
 import SvgIconStyle from '../SvgIconStyle';
@@ -34,20 +35,35 @@ export default function Settings() {
           zIndex: 999
         }}
       >
-        <Tooltip title="Settings">
+        <Tooltip title="Instagram">
           <MFab
             color="warning"
             size="medium"
-            onClick={handleOpenSettings}
+            onClick={() => {
+              window.open('https://www.instagram.com/dobermenclub.nft/');
+            }}
             sx={{
               color: (theme) => theme.palette.warning.contrastText,
               background: (theme) => theme.palette.gradients.warning
             }}
           >
-            <SvgIconStyle
-              src="/static/icons/controls/settings.svg"
-              sx={{ width: 16, height: 16 }}
-            />
+            <FaInstagram size="2em" />
+          </MFab>
+        </Tooltip>
+        <Tooltip title="Discord">
+          <MFab
+            color="warning"
+            onClick={() => {
+              window.open('https://discord.com/invite/z3PbKfPwHh/');
+            }}
+            size="medium"
+            sx={{
+              ml: 2,
+              color: (theme) => theme.palette.warning.contrastText,
+              background: (theme) => theme.palette.gradients.warning
+            }}
+          >
+            <FaDiscord size="2em" />
           </MFab>
         </Tooltip>
       </Box>
@@ -73,7 +89,7 @@ export default function Settings() {
         >
           <Typography variant="subtitle1">Settings</Typography>
           <MIconButton onClick={handleCloseSettings}>
-            <Icon icon={closeFill} width={20} height={20} />
+            <FaInstagram />
           </MIconButton>
         </Box>
         <Divider />

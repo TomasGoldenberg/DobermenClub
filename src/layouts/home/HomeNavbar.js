@@ -32,7 +32,10 @@ import MenuPopover from '../../components/MenuPopover';
 
 const MENU_LINKS = [
   { title: 'Home', icon: homeFill, href: '/' },
-  { title: 'Dashboard', icon: roundSpeed, href: PATH_HOME.dashboard }
+  { title: 'Next Release', icon: roundSpeed, href: '/#release' },
+  { title: 'RoadMap', icon: roundSpeed, href: '/#roadmap' },
+  { title: 'FAQ', icon: roundSpeed, href: '/#faq' },
+  { title: 'Advertising', icon: roundSpeed, href: '/#advertising' }
 ];
 
 const APP_BAR_MOBILE = 64;
@@ -87,28 +90,16 @@ export default function HomeNavbar() {
   const renderMenuDesktop = (
     <>
       {MENU_LINKS.map((link) => (
-        <Link
+        <a
           exact
-          to={link.href}
+          href={link.href}
           key={link.title}
           underline="none"
-          variant="subtitle2"
-          component={RouterLink}
           activeClassName="isDesktopActive"
-          sx={{
-            mr: 5,
-            color: 'text.primary',
-            transition: (theme) =>
-              theme.transitions.create('opacity', {
-                duration: theme.transitions.duration.shortest
-              }),
-            '&:hover': { opacity: 0.48 },
-            ...(isHome && { color: 'common.white' }),
-            ...(offset && { color: 'text.primary' })
-          }}
+          style={{ textDecoration: 'none', marginRight: '15px' }}
         >
           {link.title}
-        </Link>
+        </a>
       ))}
     </>
   );
@@ -122,9 +113,8 @@ export default function HomeNavbar() {
     >
       <List>
         {MENU_LINKS.map((link) => (
-          <MenuItem
-            exact
-            to={link.href}
+          <a
+            href={link.href}
             key={link.title}
             component={RouterLink}
             onClick={() => setOpenMenu(false)}
@@ -137,7 +127,7 @@ export default function HomeNavbar() {
             <ListItemText primaryTypographyProps={{ typography: 'body2' }}>
               {link.title}
             </ListItemText>
-          </MenuItem>
+          </a>
         ))}
       </List>
     </MenuPopover>
@@ -162,31 +152,16 @@ export default function HomeNavbar() {
             justifyContent: 'space-between'
           }}
         >
-          <RouterLink to="/">
+          <a href="/">
             <Logo />
-          </RouterLink>
+          </a>
           <Box sx={{ flexGrow: 1 }} />
 
           <Hidden mdDown>{renderMenuDesktop}</Hidden>
 
           <Button variant="contained" target="_blank" href={PATH_HOME.purchase}>
-            Purchase Now
+            Buy on Opensea
           </Button>
-
-          <Hidden mdUp>
-            <MIconButton
-              ref={anchorRef}
-              onClick={() => setOpenMenu(true)}
-              sx={{
-                ml: 1,
-                ...(isHome && { color: 'common.white' }),
-                ...(offset && { color: 'text.primary' })
-              }}
-            >
-              <Icon icon={menu2Fill} />
-            </MIconButton>
-            {renderMenuMobile}
-          </Hidden>
         </Container>
       </ToolbarStyle>
 
