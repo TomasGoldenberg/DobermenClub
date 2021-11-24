@@ -32,7 +32,7 @@ const HeaderStyle = styled('header')(({ theme }) => ({
 
 export default function Page404() {
   return (
-    <RootStyle title="404 Page Not Found | Minimal-UI">
+    <RootStyle title="404 Page Not Found | Dobermen club">
       <HeaderStyle>
         <RouterLink to="/">
           <Logo />
