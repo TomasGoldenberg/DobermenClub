@@ -288,7 +288,7 @@ export default function MintCountDown() {
                 'https://i.ibb.co/XXGKTWc/2847-01-Artboard-25-1.png';
             }
             return (
-              <Grid key={latestAsset?.name} item xs={12} md={4}>
+              <Grid key={index} item xs={12} md={4}>
                 <MotionInView variants={varFadeInUp}>
                   <CardStyle
                     className={

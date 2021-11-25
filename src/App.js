@@ -1,8 +1,10 @@
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { HelmetProvider } from 'react-helmet-async';
+
 import { Provider as ReduxProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
+import NotistackProvider from './components/NotistackProvider';
 // routes
 import routes, { renderRoutes } from './routes';
 // redux
@@ -26,11 +28,13 @@ export default function App() {
         <PersistGate loading={<LoadingScreen />} persistor={persistor}>
           <ThemeConfig>
             <RtlLayout>
-              <Router history={history}>
-                <Settings />
-                <ScrollToTop />
-                {renderRoutes(routes)}
-              </Router>
+              <NotistackProvider>
+                <Router history={history}>
+                  <Settings />
+                  <ScrollToTop />
+                  {renderRoutes(routes)}
+                </Router>
+              </NotistackProvider>
             </RtlLayout>
           </ThemeConfig>
         </PersistGate>

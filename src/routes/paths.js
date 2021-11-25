@@ -3,6 +3,7 @@
 function path(root, sublink) {
   return `${root}${sublink}`;
 }
+const ROOTS_AUTH = '/auth';
 
 const ROOTS_DASHBOARD = '/dashboard';
 
@@ -27,5 +28,13 @@ export const PATH_DASHBOARD = {
     pageFour: path(ROOTS_DASHBOARD, '/drop/four'),
     pageFive: path(ROOTS_DASHBOARD, '/drop/five'),
     pageSix: path(ROOTS_DASHBOARD, '/drop/six')
+  }
+};
+
+export const PATH_AUTH = {
+  root: ROOTS_AUTH,
+  auth: {
+    login: path(ROOTS_AUTH, '/login'),
+    register: path(ROOTS_AUTH, '/register/new-user')
   }
 };
