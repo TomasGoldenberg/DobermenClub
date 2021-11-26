@@ -6,6 +6,7 @@ import {
   LandingHero,
   LandingFooter,
   MintCountDown,
+  NextMilestone,
   LandingDarkMode,
   LandingAdvertisement,
   LandingRoadmap,
@@ -36,6 +37,7 @@ export default function LandingPage() {
         {window.screen.width < 600 && (
           <PhotoSection image="https://i.ibb.co/z4jTcdC/DOBER-girl-face-02-Artboard-4.png" />
         )}
+        <NextMilestone />
         <MintCountDown />
         <PhotoSection image="https://i.ibb.co/Mh6S0QF/1882-01-Artboard-2-2.png" />
         {window.screen.width > 600 && <LandingAdvertisement />}

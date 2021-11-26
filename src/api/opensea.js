@@ -24,7 +24,6 @@ export const getCollectionAssets = async (
       limit || DEFAULT_ITEMS_LIMIT
     }`
   );
-  console.log(response);
   const { assets } = response.data;
   const collectionAssets = assets.filter(
     (item) => item.collection.slug === collectionSlug

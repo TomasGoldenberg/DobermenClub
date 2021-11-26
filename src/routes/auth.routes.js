@@ -6,7 +6,6 @@ import HomeLayout from '../layouts/home';
 import { PATH_AUTH } from './paths';
 
 // ----------------------------------------------------------------------
-console.log(window.location);
 
 const AuthRoutes = {
   path: PATH_AUTH.root,

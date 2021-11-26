@@ -186,7 +186,6 @@ export default function MintCountDown() {
 
     const getLatestNfts = async () => {
       const items = await getCollectionAssets(DOBERMEN_ADDRESS, DOBERMEN_SLUG);
-      console.log(items);
       setLatestAssets(items);
     };
     getLatestNfts();

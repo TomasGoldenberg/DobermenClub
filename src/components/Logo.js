@@ -8,7 +8,7 @@ export default function Logo({ ...other }) {
     <Box
       component="img"
       alt="logo"
-      src="/static/brand/logo_single.svg"
+      src="https://i.ibb.co/7nxmmqq/whiteboy-01-bs-SMOKE3.png"
       height={40}
       {...other}
     />
