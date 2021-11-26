@@ -10,7 +10,8 @@ import {
 const NextMilestone = () => {
   const [countDown, setCountDown] = useState('02/23:00:19');
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
+  console.log(isDesktop);
   const color = '#FF00E1';
   useEffect(() => {
     const parseTime = (time) => {
@@ -154,20 +155,30 @@ const NextMilestone = () => {
 
   return (
     <Box>
-      <img src="https://i.ibb.co/Vq7bRNc/IMG-0288.jpg" alt="girls" />
+      <img
+        src={
+          !isDesktop
+            ? 'https://i.ibb.co/82fJBsR/whiteboy-1-Conflicted-copy-from-i-Pad-Air-4th-generation-on-2021-11-24-20-31-53-1-01-bs-SMOKE3.png'
+            : 'https://i.ibb.co/Vq7bRNc/IMG-0288.jpg'
+        }
+        alt="girls"
+      />
       <Box style={{ marginTop: '-150px' }}>
         <Box>
           <Typography
             style={{
-              fontSize: '21px',
-              paddingLeft: '150px'
+              fontSize: isDesktop ? '21px' : '14px',
+              paddingLeft: isDesktop ? '150px' : '38px'
             }}
           >
             DAYS - HOURS - MINUTES - SECONDS
           </Typography>
         </Box>
         <Box>
-          <Typography variant="h1" style={{ color, paddingLeft: '150px' }}>
+          <Typography
+            variant={isDesktop ? 'h1' : 'h1'}
+            style={{ color, paddingLeft: isDesktop ? '150px' : '44px' }}
+          >
             {countDown.replace('/', '-')}
           </Typography>
         </Box>
