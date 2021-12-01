@@ -258,21 +258,7 @@ export default function ProductDetailsSumary({
             </Typography>
           </Box>
           <Divider sx={{ borderStyle: 'dashed' }} />
-          <Typography
-            variant="overline"
-            sx={{
-              mt: 2,
-              textAlign: 'center',
-              mb: 1,
-              pb: 1,
-              ml: 3,
-              display: 'block',
-              color: 'success.main',
-              fontSize: 30
-            }}
-          >
-            DETAILS
-          </Typography>
+
           <Box
             sx={{
               my: 3,

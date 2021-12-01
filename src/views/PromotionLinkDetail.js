@@ -35,6 +35,7 @@ import CartWidget from '../components/product/CartWidget';
 import { LOGnewVisit } from '../api/metrics';
 import { getSingleAsset } from '../api/opensea';
 import { PROMOTERS } from '../config';
+import { removeUnderscoreAndCapitalize } from '../utils/formatStrings';
 
 const publicIp = require('public-ip');
 // ----------------------------------------------------------------------
@@ -42,17 +43,18 @@ const publicIp = require('public-ip');
 const PRODUCT_DESCRIPTION = [
   {
     title: '100% Original',
-    description: 'Chocolate bar candy canes ice cream toffee cookie halvah.',
+    description: 'A unique collectionable DOBER',
     icon: roundVerified
   },
   {
-    title: '10 Day Replacement',
-    description: 'Marshmallow biscuit donut dragée fruitcake wafer.',
+    title: 'Investment',
+    description: 'Holding DOBERS its a good idea, its floor price keeps rising',
     icon: clockFill
   },
   {
-    title: 'Year Warranty',
-    description: 'Cotton candy gingerbread cake I love sugar sweet.',
+    title: 'Transaction Security',
+    description:
+      'Clicking buy now will redirect to opensea the most secure NFT platform.',
     icon: roundVerifiedUser
   }
 ];
@@ -136,8 +138,9 @@ export default function EcommerceProductDetails() {
         colors: ['#000000'],
         buyLink: fetchedNft.permalink,
         cover: fetchedNft.image_url,
-        description:
-          '\n<p><strong><small> Description</small></strong></p>\n<p>Buy this NFT in this offer.\n<br /><br />\n<p><strong><small> HOW TO BUY</small></strong></p>\n<p> Click buy now and get redirected to open sea to buy the nft.</p>\n',
+        description: `\n<p><strong><small> ON SALE</small></strong></p>\n<p>Buying this DOBER you^re gonna be able to use it as your avatar in our future NFT Play 2 Earn Game .\n<br /><br />\n<p><strong><small> HOW TO BUY</small></strong></p>\n<p> Click buy now and get redirected to open sea to buy the nft.</p>\n<p><strong><small>THIS COLLAB</small></strong></p>\n<p> This NFT is the avatar of ${removeUnderscoreAndCapitalize(
+          params.promoterId
+        )}.</p>\n`,
         gender: 'Men',
         id: fetchedNft.id,
         images: [fetchedNft.image_thumbnail_url],
