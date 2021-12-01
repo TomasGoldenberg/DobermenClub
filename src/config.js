@@ -34,3 +34,19 @@ export const OPENSEA_API_PATH = 'https://api.opensea.io/api/v1';
 export const DOBERMEN_ADDRESS = '0x5a269d4f701AFC3FBB0Da437B4EC3e8D1dBf086C';
 export const DOBERMEN_SLUG = 'thedobermenclub';
 export const DEFAULT_ITEMS_LIMIT = '3';
+export const OPENSEA_API_KEY = '2dbcafcb79fb4d51bf84e485f2458c63';
+export const ETH_ICON =
+  'https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg';
+
+export const PROMOTERS = {
+  sophie_janovich: {
+    socialLink: 'https://www.instagram.com/sophiejanovich/'
+  }
+};
+
+export const NFTS = {
+  '#0,013': {
+    price: '0.07',
+    originalPrice: '0.08'
+  }
+};

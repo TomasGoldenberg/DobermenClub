@@ -4,6 +4,7 @@ function path(root, sublink) {
   return `${root}${sublink}`;
 }
 const ROOTS_AUTH = '/auth';
+const ROOTS_EXTERNALS = '/offers';
 
 const ROOTS_DASHBOARD = '/dashboard';
 
@@ -36,5 +37,12 @@ export const PATH_AUTH = {
   auth: {
     login: path(ROOTS_AUTH, '/login'),
     register: path(ROOTS_AUTH, '/register/new-user')
+  }
+};
+
+export const PATH_EXTERNALS = {
+  root: ROOTS_EXTERNALS,
+  externals: {
+    productOffer: path(ROOTS_EXTERNALS, '/:promoterId/:tokenId')
   }
 };

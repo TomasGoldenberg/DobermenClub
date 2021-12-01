@@ -75,6 +75,7 @@ export default function LandingHugePackElements() {
         DOBERMEN_SLUG,
         '40'
       );
+      console.log(assets);
       setAssets(assets);
     };
     getAssets();

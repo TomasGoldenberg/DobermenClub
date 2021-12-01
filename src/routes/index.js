@@ -9,6 +9,7 @@ import LoadingScreen from '../components/LoadingScreen';
 import DashboardRoutes from './dashboard.routes';
 import HomeRoutes from './home.routes';
 import AuthRoutes from './auth.routes';
+import ExternalsRoutes from './external.routes';
 // ----------------------------------------------------------------------
 
 const nprogressStyle = makeStyles((theme) => ({
@@ -98,6 +99,8 @@ const routes = [
     path: '/404',
     component: lazy(() => import('../views/Page404'))
   },
+
+  ExternalsRoutes,
 
   AuthRoutes,
   // App Routes
