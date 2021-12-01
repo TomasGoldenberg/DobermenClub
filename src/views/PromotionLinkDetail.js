@@ -1,7 +1,7 @@
 import { sum } from 'lodash';
 import { Icon } from '@iconify/react';
 import { sentenceCase } from 'change-case';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import clockFill from '@iconify/icons-eva/clock-fill';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,6 +34,7 @@ import ProductDetailsCarousel from '../components/product/ProductDetailsCarousel
 import CartWidget from '../components/product/CartWidget';
 import { LOGnewVisit } from '../api/metrics';
 import { getSingleAsset } from '../api/opensea';
+import { PROMOTERS } from '../config';
 
 const publicIp = require('public-ip');
 // ----------------------------------------------------------------------
@@ -92,6 +93,7 @@ const SkeletonLoad = (
 
 export default function EcommerceProductDetails() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [value, setValue] = useState('1');
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState({});
@@ -110,6 +112,10 @@ export default function EcommerceProductDetails() {
   const error = false;
 
   useEffect(() => {
+    if (!PROMOTERS[params.promoterId]) {
+      history.push('/404');
+    }
+
     const logMetric = async () => {
       const ip = await publicIp.v4();
       try {
@@ -122,7 +128,7 @@ export default function EcommerceProductDetails() {
     const getNft = async () => {
       setLoading(true);
       const fetchedNft = await getSingleAsset(params.tokenId);
-      console.log(fetchedNft);
+
       const product = {
         ...fetchedNft,
         available: 1,
@@ -188,7 +194,7 @@ export default function EcommerceProductDetails() {
               name: 'Promotions',
               href: PATH_DASHBOARD.root
             },
-            { name: name || 'Offer' }
+            { name: name || 'Offers' }
           ]}
         />
 

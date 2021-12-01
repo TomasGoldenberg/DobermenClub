@@ -46,11 +46,13 @@ import ETHIcon from '../ETHIcon';
 const SOCIALS = [
   {
     name: 'Instagram',
+    link: 'https://www.instagram.com/dobermenclub.nft/',
     icon: <Icon icon={instagramFilled} width={20} height={20} color="#D7336D" />
   },
 
   {
     name: 'Twitter',
+    link: 'https://twitter.com/Thedobermenclub',
     icon: <Icon icon={twitterFill} width={20} height={20} color="#1C9CEA" />
   }
 ];
@@ -429,7 +431,13 @@ export default function ProductDetailsSumary({
             {SOCIALS.map((social) => {
               const { icon } = social;
               return (
-                <Tooltip key={social.name} title={social.name}>
+                <Tooltip
+                  key={social.name}
+                  title={social.name}
+                  onClick={() => {
+                    window.open(social.link);
+                  }}
+                >
                   <MIconButton>{icon}</MIconButton>
                 </Tooltip>
               );
