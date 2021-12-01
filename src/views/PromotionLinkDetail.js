@@ -115,19 +115,19 @@ export default function EcommerceProductDetails() {
   const totalItems = sum(checkout.cart.map((item) => item.quantity));
   const error = false;
 
+  const logMetric = async (type) => {
+    const ip = await publicIp.v4();
+    try {
+      LOGnewVisit(ip, params.promoterId, params.tokenId, type);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (!PROMOTERS[params.promoterId]) {
       history.push('/404');
     }
-
-    const logMetric = async () => {
-      const ip = await publicIp.v4();
-      try {
-        LOGnewVisit(ip, params.promoterId, params.tokenId);
-      } catch (error) {
-        console.log(error);
-      }
-    };
 
     const getNft = async () => {
       setLoading(true);
@@ -172,7 +172,7 @@ export default function EcommerceProductDetails() {
     getNft();
 
     if (process.env.NODE_ENV !== 'development') {
-      logMetric();
+      logMetric('visits');
     }
   }, []);
 
@@ -214,6 +214,7 @@ export default function EcommerceProductDetails() {
                   {!loading && (
                     <ProductDetailsSumary
                       params={params}
+                      logMetric={logMetric}
                       product={product}
                       cart={checkout.cart}
                       onAddCart={handleAddCart}

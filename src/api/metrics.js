@@ -4,9 +4,9 @@ import 'firebase/auth';
 import { firebaseConfig } from '../config';
 
 firebase.initializeApp(firebaseConfig);
-export const LOGnewVisit = async (ip, promoterId, tokenId) => {
+export const LOGnewVisit = async (ip, promoterId, tokenId, type) => {
   const parsedIp = ip.replace(/\./g, '');
-  const newMetricsRef = firebase.database().ref(`/metrics/${parsedIp}`);
+  const newMetricsRef = firebase.database().ref(`/metrics/${type}/${parsedIp}`);
   let ipDoesExist;
   await newMetricsRef.once('value').then((snap) => (ipDoesExist = snap.val()));
 
@@ -14,6 +14,7 @@ export const LOGnewVisit = async (ip, promoterId, tokenId) => {
     ? {
         ip,
         promoter: promoterId,
+        type: type.toUpperCase(),
         tokenId,
         times_visited: ipDoesExist.times_visited + 1,
         updated_at: new Date().toISOString(),
@@ -23,6 +24,7 @@ export const LOGnewVisit = async (ip, promoterId, tokenId) => {
         ip,
         promoter: promoterId,
         tokenId,
+        type: type.toUpperCase(),
         times_visited: 1,
         created_at: new Date().toISOString()
       };

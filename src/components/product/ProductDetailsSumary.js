@@ -137,6 +137,7 @@ export default function ProductDetailsSumary({
   onAddCart,
   onGotoStep,
   params,
+  logMetric,
   ...other
 }) {
   const theme = useTheme();
@@ -403,6 +404,7 @@ export default function ProductDetailsSumary({
                   size="large"
                   type="submit"
                   onClick={() => {
+                    logMetric('buy_attempt');
                     window.open(buyLink);
                   }}
                   variant="contained"
