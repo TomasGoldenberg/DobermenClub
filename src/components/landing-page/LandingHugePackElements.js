@@ -233,7 +233,7 @@ export default function LandingHugePackElements() {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>Contact us at dobermenclub@gmail.com.</Typography>
+              <Typography>Contact us at dobermenclubnft@gmail.com.</Typography>
             </AccordionDetails>
           </Accordion>
         </div>

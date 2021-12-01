@@ -43,18 +43,20 @@ const publicIp = require('public-ip');
 const PRODUCT_DESCRIPTION = [
   {
     title: '100% Original',
-    description: 'A unique collectionable DOBER',
+    description:
+      'A unique handmade collectionable DOBER Living on the Ethereum BlockChain',
     icon: roundVerified
   },
   {
-    title: 'Investment',
-    description: 'Holding DOBERS its a good idea, its floor price keeps rising',
-    icon: clockFill
+    title: 'Holders Dober Club',
+    description:
+      'As a DOBER Holder you are part of out distinguished owners club community. Having a vote on important decisions',
+    icon: roundVerified
   },
   {
     title: 'Transaction Security',
     description:
-      'Clicking buy now will redirect to opensea the most secure NFT platform.',
+      'Clicking buy now will redirect to Opensea platform the most secure TOP NFT platform in the market.',
     icon: roundVerifiedUser
   }
 ];
@@ -138,9 +140,9 @@ export default function EcommerceProductDetails() {
         colors: ['#000000'],
         buyLink: fetchedNft.permalink,
         cover: fetchedNft.image_url,
-        description: `\n<p><strong><small> ON SALE</small></strong></p>\n<p>Buying this DOBER you^re gonna be able to use it as your avatar in our future NFT Play 2 Earn Game .\n<br /><br />\n<p><strong><small> HOW TO BUY</small></strong></p>\n<p> Click buy now and get redirected to open sea to buy the nft.</p>\n<p><strong><small>THIS COLLAB</small></strong></p>\n<p> This NFT is the avatar of ${removeUnderscoreAndCapitalize(
+        description: `\n<p><strong><small> ON SALE</small></strong></p>\n<p>Buying this DOBER you^re gonna be able to be an important member of out distinguished club and take advantage of it : Use your DOBER as your avatar in our future NFT Play 2 Earn Game | You are given a user and password in out platform to propose your ideas for this project | And much more ! .\n<br /><br />\n<p><strong><small> HOW TO BUY</small></strong></p>\n<p> Click buy now and get redirected to open sea to buy the nft or browse a different DOBER of out Collection.</p>\n<p><strong><small>THIS COLLAB</small></strong></p>\n<p> This NFT is the avatar of ${removeUnderscoreAndCapitalize(
           params.promoterId
-        )}.</p>\n`,
+        )} , If you want to do a Collab with us let us know on  dobermenclubnft@gmail.com.</p>\n`,
         gender: 'Men',
         id: fetchedNft.id,
         images: [fetchedNft.image_thumbnail_url],
