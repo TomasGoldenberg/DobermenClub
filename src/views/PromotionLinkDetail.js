@@ -14,6 +14,7 @@ import {
   Tab,
   Card,
   Grid,
+  CircularProgress,
   Divider,
   Skeleton,
   Container,
@@ -206,23 +207,27 @@ export default function EcommerceProductDetails() {
         {product && (
           <>
             <Card>
-              <Grid container>
-                <Grid item xs={12} md={6} lg={7}>
-                  {!loading && <ProductDetailsCarousel product={product} />}
+              {!loading ? (
+                <Grid container>
+                  <Grid item xs={12} md={6} lg={7}>
+                    {!loading && <ProductDetailsCarousel product={product} />}
+                  </Grid>
+                  <Grid item xs={12} md={6} lg={5}>
+                    {!loading && (
+                      <ProductDetailsSumary
+                        params={params}
+                        logMetric={logMetric}
+                        product={product}
+                        cart={checkout.cart}
+                        onAddCart={handleAddCart}
+                        onGotoStep={handleGotoStep}
+                      />
+                    )}
+                  </Grid>
                 </Grid>
-                <Grid item xs={12} md={6} lg={5}>
-                  {!loading && (
-                    <ProductDetailsSumary
-                      params={params}
-                      logMetric={logMetric}
-                      product={product}
-                      cart={checkout.cart}
-                      onAddCart={handleAddCart}
-                      onGotoStep={handleGotoStep}
-                    />
-                  )}
-                </Grid>
-              </Grid>
+              ) : (
+                <CircularProgress />
+              )}
             </Card>
 
             <Grid container sx={{ my: 8 }}>

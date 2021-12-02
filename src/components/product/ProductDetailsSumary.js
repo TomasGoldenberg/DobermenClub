@@ -255,7 +255,7 @@ export default function ProductDetailsSumary({
               sx={{ mb: 3, display: 'flex', alignItems: 'center' }}
             >
               &nbsp; <ETHIcon />
-              {fCurrency(NFTS[name].price)}
+              {NFTS[name].price}
             </Typography>
           </Box>
           <Divider sx={{ borderStyle: 'dashed' }} />
@@ -289,15 +289,25 @@ export default function ProductDetailsSumary({
             <Typography variant="subtitle1" sx={{ mt: 0.5 }}>
               Powers
             </Typography>
-            {getNftTraitType(product.traits, 'POWER').map((power) => (
-              <Chip
-                key={power}
-                label={power.value}
-                variant="outlined"
-                color="error"
-                icon={<FlashOnIcon />}
-              />
-            ))}
+            <Box
+              style={{
+                display: 'flex',
+                flexDirection: window.screen.width < 600 ? 'column' : 'row',
+                flexWrap: window.screen.width < 600 ? 'no-wrap' : 'wrap',
+                justifyContent: ' space-around'
+              }}
+            >
+              {getNftTraitType(product.traits, 'POWER').map((power) => (
+                <Chip
+                  key={power}
+                  style={{ marginTop: '5px' }}
+                  label={power.value}
+                  variant="outlined"
+                  color="error"
+                  icon={<FlashOnIcon />}
+                />
+              ))}
+            </Box>
           </Box>
           <Box
             sx={{

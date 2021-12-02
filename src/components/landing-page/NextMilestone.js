@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Box, useMediaQuery, Typography } from '@material-ui/core';
-
+import { Box, useMediaQuery, Typography, Button } from '@material-ui/core';
 import {
   alpha,
   useTheme,
   experimentalStyled as styled
 } from '@material-ui/core/styles';
+import { isFuture } from '../../utils/formatDate';
 
 const NextMilestone = () => {
   const [countDown, setCountDown] = useState('02/23:00:19');
+  const [isInTheFuture, setIsInTheFuture] = useState(false);
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
-  console.log(isDesktop);
+
   const color = '#FF00E1';
   useEffect(() => {
     const parseTime = (time) => {
@@ -23,7 +24,12 @@ const NextMilestone = () => {
     };
 
     // DATE
-    const releaseDay = new Date(2021, 11, 1, '18', '00');
+    const releaseDay = new Date(2021, 11, 2, '18', '00');
+    const isInTheFuture = isFuture(releaseDay);
+    if (isInTheFuture) {
+      setIsInTheFuture(true);
+    }
+
     const today = new Date();
     const diffInDays = parseTime(getDifferenceInDays(releaseDay, today));
     const diffInHours = parseTime(
@@ -106,10 +112,6 @@ const NextMilestone = () => {
       let minutesString = time.slice(3, 5);
       let secondsString = time.slice(-2);
 
-      console.log(hoursString);
-      console.log(minutesString);
-      console.log(secondsString);
-
       const handleZeros = (number) => {
         let string = number.toString();
         const isLessThanTen = string.length === 1;
@@ -164,24 +166,47 @@ const NextMilestone = () => {
         alt="girls"
       />
       <Box style={{ marginTop: '-150px' }}>
-        <Box>
-          <Typography
+        {isInTheFuture ? (
+          <>
+            <Box>
+              <Typography
+                style={{
+                  fontSize: isDesktop ? '21px' : '14px',
+                  paddingLeft: isDesktop ? '150px' : '38px'
+                }}
+              >
+                DAYS - HOURS - MINUTES - SECONDS
+              </Typography>
+            </Box>
+            <Box>
+              <Typography
+                variant={isDesktop ? 'h1' : 'h1'}
+                style={{ color, paddingLeft: isDesktop ? '150px' : '44px' }}
+              >
+                {countDown.replace('/', '-')}
+              </Typography>
+            </Box>
+          </>
+        ) : (
+          <Box
             style={{
-              fontSize: isDesktop ? '21px' : '14px',
-              paddingLeft: isDesktop ? '150px' : '38px'
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center'
             }}
           >
-            DAYS - HOURS - MINUTES - SECONDS
-          </Typography>
-        </Box>
-        <Box>
-          <Typography
-            variant={isDesktop ? 'h1' : 'h1'}
-            style={{ color, paddingLeft: isDesktop ? '150px' : '44px' }}
-          >
-            {countDown.replace('/', '-')}
-          </Typography>
-        </Box>
+            <Button
+              style={{
+                background: color,
+                marginTop: '60px',
+                marginRight: isDesktop ? '600px' : '0px'
+              }}
+              variant="filled"
+            >
+              Check it out !
+            </Button>
+          </Box>
+        )}
       </Box>
     </Box>
   );

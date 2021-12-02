@@ -45,8 +45,8 @@ export const PROMOTERS = {
 };
 
 export const NFTS = {
-  '#0,013': {
-    price: '0.07',
+  '#0,031': {
+    price: '0.4',
     originalPrice: '0.08'
   }
 };

@@ -375,8 +375,8 @@ export default function MintCountDown() {
                           marginBottom: '10px'
                         }}
                       >
-                        {powers?.map((item) => {
-                          if (index > 0) {
+                        {powers?.map((item, i) => {
+                          if (index > 0 || i > 1) {
                             return <></>;
                           }
                           return (
