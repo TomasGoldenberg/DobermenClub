@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Box, useMediaQuery, Typography, Button } from '@material-ui/core';
 import {
   alpha,
@@ -11,6 +12,7 @@ const NextMilestone = () => {
   const [countDown, setCountDown] = useState('02/23:00:19');
   const [isInTheFuture, setIsInTheFuture] = useState(false);
   const theme = useTheme();
+  const history = useHistory();
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
   const color = '#FF00E1';
@@ -200,6 +202,11 @@ const NextMilestone = () => {
                 background: color,
                 marginTop: '60px',
                 marginRight: isDesktop ? '600px' : '0px'
+              }}
+              onClick={() => {
+                history.push(
+                  '/offers/sophie_janovich/40776382276773864176470599353858705488502840431300644847615322469179638939649?from-section=home'
+                );
               }}
               variant="filled"
             >

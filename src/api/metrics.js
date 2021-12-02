@@ -9,9 +9,9 @@ export const LOGnewVisit = async (ip, promoterId, tokenId, type) => {
   const parsedIp = ip.replace(/\./g, '');
   const newMetricsRef = firebase.database().ref(`/metrics/${type}/${parsedIp}`);
   let ipDoesExist;
-  let country;
-  let state;
-  let city;
+  let country = 'NONE';
+  let state = 'NONE';
+  let city = 'NONE';
   await newMetricsRef.once('value').then((snap) => (ipDoesExist = snap.val()));
 
   if (!ipDoesExist) {
@@ -33,7 +33,7 @@ export const LOGnewVisit = async (ip, promoterId, tokenId, type) => {
   const newMetric = ipDoesExist
     ? {
         ip,
-        promoter: promoterId,
+        promoter: promoterId === ipDoesExist.promoter ? promoterId : 'BOTH',
         type: type.toUpperCase(),
         tokenId,
         times_visited: ipDoesExist.times_visited + 1,

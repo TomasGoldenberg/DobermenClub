@@ -1,7 +1,7 @@
 import { sum } from 'lodash';
 import { Icon } from '@iconify/react';
 import { sentenceCase } from 'change-case';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import clockFill from '@iconify/icons-eva/clock-fill';
 import { useDispatch, useSelector } from 'react-redux';
@@ -99,12 +99,15 @@ const SkeletonLoad = (
 export default function EcommerceProductDetails() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
+  console.log(location);
   const [value, setValue] = useState('1');
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState({});
   const params = useParams();
   const { name } = useParams();
-
+  const comesFromHome = location.search.includes('from-section=home');
+  console.log(comesFromHome);
   const checkout = {
     activeStep: 0,
     billing: null,
@@ -118,8 +121,9 @@ export default function EcommerceProductDetails() {
 
   const logMetric = async (type) => {
     const ip = await publicIp.v4();
+    const promoter = comesFromHome ? 'NONE' : params.promoterId;
     try {
-      LOGnewVisit(ip, params.promoterId, params.tokenId, type);
+      LOGnewVisit(ip, promoter, params.tokenId, type);
     } catch (error) {
       console.log(error);
     }
@@ -206,7 +210,11 @@ export default function EcommerceProductDetails() {
 
         {product && (
           <>
-            <Card>
+            <Card
+              style={
+                loading ? { display: 'flex', justifyContent: 'center' } : {}
+              }
+            >
               {!loading ? (
                 <Grid container>
                   <Grid item xs={12} md={6} lg={7}>
