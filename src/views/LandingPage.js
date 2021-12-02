@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 // material
 import { experimentalStyled as styled } from '@material-ui/core/styles';
 // components
@@ -13,6 +14,9 @@ import {
   LandingHugePackElements,
   PhotoSection
 } from '../components/landing-page';
+import { LOGnewVisit } from '../api/metrics';
+
+const publicIp = require('public-ip');
 
 // ----------------------------------------------------------------------
 
@@ -29,6 +33,18 @@ const ContentStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function LandingPage() {
+  useEffect(() => {
+    const logMetric = async (type) => {
+      const ip = await publicIp.v4();
+      try {
+        LOGnewVisit(ip, 'NONE', 'NONE', type);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    logMetric('home_visits');
+  }, []);
   return (
     <RootStyle title="DobermenClub | NFT COLLECTION" id="move_top">
       <LandingHero />
