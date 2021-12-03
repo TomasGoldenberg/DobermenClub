@@ -3,6 +3,6 @@ export const getNftRarety = (traits) =>
 
 export const getNftTraitType = (traits, type) => {
   const typeList = traits.filter((asset, index) => asset.trait_type === type);
-  console.log(typeList);
+
   return typeList;
 };

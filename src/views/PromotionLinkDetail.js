@@ -100,14 +100,14 @@ export default function EcommerceProductDetails() {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-  console.log(location);
+
   const [value, setValue] = useState('1');
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState({});
   const params = useParams();
   const { name } = useParams();
   const comesFromHome = location.search.includes('from-section=home');
-  console.log(comesFromHome);
+
   const checkout = {
     activeStep: 0,
     billing: null,
@@ -169,7 +169,6 @@ export default function EcommerceProductDetails() {
         ],
         reviews: []
       };
-      console.log(product);
 
       setProduct(product);
       setLoading(false);

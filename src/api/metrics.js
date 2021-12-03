@@ -22,8 +22,6 @@ export const LOGnewVisit = async (ip, promoterId, tokenId, type) => {
       state = data.region;
       city = data.city;
     } catch (error) {
-      console.log(error);
-      console.log(error.response);
       country = 'NONE';
       state = 'NONE';
       city = 'NONE';

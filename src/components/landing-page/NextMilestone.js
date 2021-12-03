@@ -106,7 +106,7 @@ const NextMilestone = () => {
       let day = time;
       day = day.slice(0, dayIndex);
       time = time.slice(dayIndex, time.length);
-      console.log(time);
+
       const hours = Number(time.slice(0, 2));
       const minutes = Number(time.slice(3, 5));
       const seconds = Number(time.slice(-2));

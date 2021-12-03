@@ -24,6 +24,9 @@ export const PATH_DASHBOARD = {
     pageTwo: path(ROOTS_DASHBOARD, '/two'),
     pageThree: path(ROOTS_DASHBOARD, '/three')
   },
+  analytics: {
+    root: path(ROOTS_DASHBOARD, '/analytics')
+  },
   app: {
     root: path(ROOTS_DASHBOARD, '/drop'),
     pageFour: path(ROOTS_DASHBOARD, '/drop/four'),

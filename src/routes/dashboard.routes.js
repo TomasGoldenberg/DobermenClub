@@ -11,6 +11,12 @@ const DashboardRoutes = {
   path: PATH_DASHBOARD.root,
   layout: DashboardLayout,
   routes: [
+    // METRICS
+    {
+      exact: true,
+      path: PATH_DASHBOARD.analytics.root,
+      component: lazy(() => import('../views/AnalyticsPage'))
+    },
     // GENERAL
     // ----------------------------------------------------------------------
     {
