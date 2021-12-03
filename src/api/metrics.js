@@ -17,7 +17,7 @@ export const LOGnewVisit = async (ip, promoterId, tokenId, type) => {
   if (!ipDoesExist) {
     try {
       const { data } = await getIpLocation(ip);
-      console.log(data);
+
       country = data.country;
       state = data.region;
       city = data.city;
