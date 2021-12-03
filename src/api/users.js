@@ -11,3 +11,28 @@ export const getUserByUid = async (uid) => {
 
   return user;
 };
+
+export const getAllUsers = async (onlyQuantityNumber) => {
+  const usersRef = firebase.database().ref(`/users`);
+  let rows;
+  await usersRef
+    .once('value')
+    .then((snap) => {
+      rows = snap.val();
+    })
+    .catch((e) => console.log(e));
+
+  if (!rows) {
+    return 0;
+  }
+  const rowsKeys = Object.keys(rows);
+
+  if (onlyQuantityNumber) {
+    const usersNumber = rowsKeys?.length;
+    return usersNumber;
+  }
+
+  const rowsArray = rowsKeys.map((row) => rows[row]);
+
+  return rowsArray;
+};

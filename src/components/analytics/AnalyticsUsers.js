@@ -1,10 +1,12 @@
+import React, { useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
-import bugFilled from '@iconify/icons-ant-design/bug-filled';
+import bugFilled from '@iconify/icons-ant-design/usergroup-add';
 // material
 import { alpha, experimentalStyled as styled } from '@material-ui/core/styles';
 import { Card, Typography } from '@material-ui/core';
 // utils
 import { fShortenNumber } from '../../utils/formatNumber';
+import { getAllUsers } from '../../api/users';
 
 // ----------------------------------------------------------------------
 
@@ -36,15 +38,24 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 const TOTAL = 234;
 
-export default function AnalyticsBugReports() {
+export default function AnalyticsUsers() {
+  const [totalUsers, setTotalUsersVisits] = useState(0);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const total = await getAllUsers(true);
+      setTotalUsersVisits(total);
+    };
+    getUsers();
+  }, []);
   return (
     <RootStyle>
       <IconWrapperStyle>
         <Icon icon={bugFilled} width={24} height={24} />
       </IconWrapperStyle>
-      <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
+      <Typography variant="h3">{fShortenNumber(totalUsers)}</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Bug Reports
+        Users
       </Typography>
     </RootStyle>
   );

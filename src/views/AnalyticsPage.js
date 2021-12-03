@@ -2,11 +2,11 @@
 import { Box, Grid, Container, Typography } from '@material-ui/core';
 // components
 import Page from '../components/Page';
-import AnalyticsNewUsers from '../components/analytics/AnalyticsNewUsers';
-import AnalyticsBugReports from '../components/analytics/AnalyticsBugReports';
-import AnalyticsItemOrders from '../components/analytics/AnalyticsItemOrder';
+import AnalyticsExternalLinks from '../components/analytics/AnalyticsExternalLinks';
+import AnalyticsUsers from '../components/analytics/AnalyticsUsers';
+import AnalyticsBuyAttempts from '../components/analytics/AnalyticsBuyAttempts';
 import AnalyticsNewsUpdate from '../components/analytics/AnalyticsNewsUpdate';
-import AnalyticsWeeklySales from '../components/analytics/AnalyticsWeeklySales';
+import AnalyticsHomePage from '../components/analytics/AnalyticsHomePage';
 import AnalyticsOrderTimeline from '../components/analytics/AnalyticsOrderTImeline';
 import AnalyticsCurrentVisits from '../components/analytics/AnalyticsCurrentVisits';
 import AnalyticsWebsiteVisits from '../components/analytics/AnalyticsWebsiteVisits';
@@ -25,16 +25,16 @@ export default function GeneralAnalytics() {
         </Box>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
-            <AnalyticsWeeklySales />
+            <AnalyticsHomePage />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <AnalyticsNewUsers />
+            <AnalyticsExternalLinks />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <AnalyticsItemOrders />
+            <AnalyticsBuyAttempts />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <AnalyticsBugReports />
+            <AnalyticsUsers />
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>

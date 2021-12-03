@@ -1,10 +1,12 @@
+import React, { useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
-import windowsFilled from '@iconify/icons-ant-design/windows-filled';
+import homeFilled from '@iconify/icons-ant-design/home-fill';
 // material
 import { alpha, experimentalStyled as styled } from '@material-ui/core/styles';
 import { Card, Typography } from '@material-ui/core';
 // utils
 import { fShortenNumber } from '../../utils/formatNumber';
+import { getMetricByType } from '../../api/metrics';
 
 // ----------------------------------------------------------------------
 
@@ -12,8 +14,8 @@ const RootStyle = styled(Card)(({ theme }) => ({
   boxShadow: 'none',
   textAlign: 'center',
   padding: theme.spacing(5, 0),
-  color: theme.palette.warning.darker,
-  backgroundColor: theme.palette.warning.lighter
+  color: theme.palette.primary.darker,
+  backgroundColor: theme.palette.primary.lighter
 }));
 
 const IconWrapperStyle = styled('div')(({ theme }) => ({
@@ -25,26 +27,35 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
   height: theme.spacing(8),
   justifyContent: 'center',
   marginBottom: theme.spacing(3),
-  color: theme.palette.warning.dark,
+  color: theme.palette.primary.dark,
   backgroundImage: `linear-gradient(135deg, ${alpha(
-    theme.palette.warning.dark,
+    theme.palette.primary.dark,
     0
-  )} 0%, ${alpha(theme.palette.warning.dark, 0.24)} 100%)`
+  )} 0%, ${alpha(theme.palette.primary.dark, 0.24)} 100%)`
 }));
 
 // ----------------------------------------------------------------------
 
-const TOTAL = 1723315;
+const TOTAL = 714000;
 
-export default function AnalyticsItemOrders() {
+export default function AnalyticsHomePage() {
+  const [homeVisits, setHomeVisits] = useState(0);
+
+  useEffect(() => {
+    const getVisits = async () => {
+      const total = await getMetricByType('home_visits', true);
+      setHomeVisits(total);
+    };
+    getVisits();
+  }, []);
   return (
     <RootStyle>
       <IconWrapperStyle>
-        <Icon icon={windowsFilled} width={24} height={24} />
+        <Icon icon={homeFilled} width={24} height={24} />
       </IconWrapperStyle>
-      <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
+      <Typography variant="h3">{fShortenNumber(homeVisits)}</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Item Orders
+        Home visits
       </Typography>
     </RootStyle>
   );

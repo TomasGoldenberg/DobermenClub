@@ -56,3 +56,28 @@ export const LOGnewVisit = async (ip, promoterId, tokenId, type) => {
 
   return newMetric;
 };
+
+export const getMetricByType = async (type, onlyQuantityNumber) => {
+  const metricTypeRef = firebase.database().ref(`/metrics/${type}`);
+  let rows;
+  await metricTypeRef
+    .once('value')
+    .then((snap) => {
+      rows = snap.val();
+    })
+    .catch((e) => console.log(e));
+
+  if (!rows) {
+    return 0;
+  }
+  const rowsKeys = Object.keys(rows);
+
+  if (onlyQuantityNumber) {
+    const visitNumber = rowsKeys?.length;
+    return visitNumber;
+  }
+
+  const rowsArray = rowsKeys.map((row) => rows[row]);
+
+  return rowsArray;
+};
