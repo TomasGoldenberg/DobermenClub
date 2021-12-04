@@ -1,9 +1,11 @@
+import React, { useState, useEffect } from 'react';
 import { merge } from 'lodash';
 import ReactApexChart from 'react-apexcharts';
 // material
 import { Card, CardHeader, Box } from '@material-ui/core';
 //
 import { BaseOptionChart } from '../charts';
+import { getMetricsByOrigin } from '../../api/metrics';
 
 // ----------------------------------------------------------------------
 
@@ -11,38 +13,39 @@ const CHART_DATA = [
   {
     name: 'Team A',
     type: 'column',
-    data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30]
+    data: [23, 11, 22, 27, 13, 22, 37]
   },
   {
     name: 'Team B',
     type: 'area',
-    data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43]
+    data: [44, 55, 41, 67, 22, 43, 21]
   },
   {
     name: 'Team C',
     type: 'line',
-    data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39]
+    data: [30, 25, 36, 30, 45, 35, 64]
   }
 ];
 
 export default function AnalyticsWebsiteVisits() {
+  const [trafficOrigin, setTrafficOrigin] = useState({
+    data: [],
+    labels: []
+  });
+
+  useEffect(() => {
+    const getMetrics = async () => {
+      const trafficData = await getMetricsByOrigin();
+      console.log(trafficData);
+      setTrafficOrigin(trafficData);
+    };
+    getMetrics();
+  }, []);
   const chartOptions = merge(BaseOptionChart(), {
     stroke: { width: [0, 2, 3] },
     plotOptions: { bar: { columnWidth: '11%', borderRadius: 4 } },
     fill: { type: ['solid', 'gradient', 'solid'] },
-    labels: [
-      '01/01/2003',
-      '02/01/2003',
-      '03/01/2003',
-      '04/01/2003',
-      '05/01/2003',
-      '06/01/2003',
-      '07/01/2003',
-      '08/01/2003',
-      '09/01/2003',
-      '10/01/2003',
-      '11/01/2003'
-    ],
+    labels: trafficOrigin.labels,
     xaxis: { type: 'datetime' },
     tooltip: {
       shared: true,
@@ -64,7 +67,7 @@ export default function AnalyticsWebsiteVisits() {
       <Box sx={{ p: 3, pb: 1 }} dir="ltr">
         <ReactApexChart
           type="line"
-          series={CHART_DATA}
+          series={trafficOrigin.data}
           options={chartOptions}
           height={364}
         />

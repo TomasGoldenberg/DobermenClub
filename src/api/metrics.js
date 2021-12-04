@@ -3,6 +3,8 @@ import 'firebase/database';
 import 'firebase/auth';
 import { firebaseConfig } from '../config';
 import { getIpLocation } from '../utils/getIpLocation';
+import { handleZeros } from '../utils/formatDate';
+import { MONTHS } from '../constants/dates';
 
 firebase.initializeApp(firebaseConfig);
 export const LOGnewVisit = async (ip, promoterId, tokenId, type) => {
@@ -80,4 +82,133 @@ export const getMetricByType = async (type, onlyQuantityNumber) => {
   const rowsArray = rowsKeys.map((row) => rows[row]);
 
   return rowsArray;
+};
+
+export const getAllVisits = async () => {
+  const externalVisitsRef = firebase.database().ref(`/metrics/visits`);
+  const homeVisitsRef = firebase.database().ref(`/metrics/home_visits`);
+  let homeVisits = {};
+  let externalVisits = {};
+
+  try {
+    await externalVisitsRef.once('value').then((snap) => {
+      externalVisits = snap.val();
+    });
+    await homeVisitsRef.once('value').then((snap) => {
+      homeVisits = snap.val();
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  const allVisits = {
+    ...homeVisits,
+    ...externalVisits
+  };
+
+  return allVisits;
+};
+
+export const getVisitsCountries = async () => {
+  const allVisits = await getAllVisits();
+
+  const visits = Object.keys(allVisits).map((visitId) => allVisits[visitId]);
+
+  let countries = {};
+
+  visits.forEach((visit) => {
+    const country = visit.country || 'NONE';
+
+    countries = {
+      ...countries,
+      [country]: countries[country] + 1 || 1
+    };
+  });
+
+  const countryList = Object.keys(countries);
+  const valueList = Object.values(countries);
+  return {
+    countries: countryList,
+    values: valueList
+  };
+};
+
+export const getMetricsByOrigin = async () => {
+  const allVisits = await getAllVisits();
+
+  const visits = Object.keys(allVisits).map((visitId) => allVisits[visitId]);
+
+  const promoters = {
+    name: 'Promoters',
+    type: 'area', // line
+    data: []
+  };
+
+  const organic = {
+    name: 'Organic',
+    type: 'area',
+    data: []
+  };
+
+  const example = {
+    name: 'Team C',
+    type: 'column',
+    data: []
+  };
+
+  let dates = {};
+
+  visits.forEach((item) => {
+    const date = new Date(item.created_at);
+    if (!date) {
+      return;
+    }
+    const isOrganic = item.promoter === 'NONE';
+    const day = date.getDate();
+    const month = MONTHS[date.getMonth()];
+    const dateItemLabel = `${month}, ${handleZeros(day)}`;
+
+    const existingValue = dates[dateItemLabel] || {};
+    const existingOrganicValue = existingValue.organic || 0;
+    const existingPromoterValue = existingValue.promoter || 0;
+
+    const dateItemValues = {
+      label: dateItemLabel,
+      organic: isOrganic ? existingOrganicValue + 1 : existingOrganicValue,
+      promoter: !isOrganic ? existingPromoterValue + 1 : existingPromoterValue
+    };
+
+    dates = {
+      ...dates,
+      [dateItemLabel]: dateItemValues
+    };
+  });
+
+  const datesKeysRaw = Object.keys(dates);
+
+  const datesWithOrder = datesKeysRaw.map((string) => {
+    const date = new Date(string);
+    const order = `${date.getMonth()}${date.getDate()}`;
+    return {
+      date: string,
+      order
+    };
+  });
+  datesWithOrder.sort((a, b) => a.order - b.order);
+
+  const datesKeys = datesWithOrder.map((item) => item.date);
+
+  const datesArray = datesKeys.map((dateLabel) => dates[dateLabel]);
+
+  datesArray.forEach((date) => {
+    organic.data.push(date.organic);
+    promoters.data.push(date.promoter);
+    example.data.push(1);
+  });
+
+  const result = {
+    labels: datesKeys,
+    data: [promoters, organic, example]
+  };
+  return result;
 };

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { merge } from 'lodash';
 import ReactApexChart from 'react-apexcharts';
 // material
@@ -10,6 +11,7 @@ import { Card, CardHeader } from '@material-ui/core';
 import { fNumber } from '../../utils/formatNumber';
 //
 import { BaseOptionChart } from '../charts';
+import { getVisitsCountries } from '../../api/metrics';
 
 // ----------------------------------------------------------------------
 
@@ -36,17 +38,32 @@ const ChartWrapperStyle = styled('div')(({ theme }) => ({
 
 const CHART_DATA = [4344, 5435, 1443, 4443];
 
-export default function AnalyticsCurrentVisits() {
+export default function AnalyticsVisitsByCountry() {
+  const [countries, setCountries] = useState({});
   const theme = useTheme();
 
+  useEffect(() => {
+    const getCountries = async () => {
+      const countries = await getVisitsCountries();
+      setCountries(countries);
+    };
+    getCountries();
+  }, []);
+
+  const colorOptions = [
+    theme.palette.primary.main,
+    theme.palette.info.main,
+    theme.palette.warning.main,
+    theme.palette.error.main,
+    '#FF00E1',
+    theme.palette.warning.light,
+    theme.palette.primary.dark,
+    theme.palette.info.light
+  ];
+
   const chartOptions = merge(BaseOptionChart(), {
-    colors: [
-      theme.palette.primary.main,
-      theme.palette.info.main,
-      theme.palette.warning.main,
-      theme.palette.error.main
-    ],
-    labels: ['America', 'Asia', 'Europe', 'Africa'],
+    colors: colorOptions,
+    labels: countries.countries,
     stroke: { colors: [theme.palette.background.paper] },
     legend: { floating: true, horizontalAlign: 'center' },
     dataLabels: { enabled: true, dropShadow: { enabled: false } },
@@ -66,14 +83,16 @@ export default function AnalyticsCurrentVisits() {
 
   return (
     <Card>
-      <CardHeader title="Current Visits" />
+      <CardHeader title="Trafic by country" />
       <ChartWrapperStyle dir="ltr">
-        <ReactApexChart
-          type="pie"
-          series={CHART_DATA}
-          options={chartOptions}
-          height={280}
-        />
+        {Object.keys(countries).length > 0 && (
+          <ReactApexChart
+            type="pie"
+            series={countries.values}
+            options={chartOptions}
+            height={320}
+          />
+        )}
       </ChartWrapperStyle>
     </Card>
   );

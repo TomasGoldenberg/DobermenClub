@@ -8,7 +8,7 @@ import AnalyticsBuyAttempts from '../components/analytics/AnalyticsBuyAttempts';
 import AnalyticsNewsUpdate from '../components/analytics/AnalyticsNewsUpdate';
 import AnalyticsHomePage from '../components/analytics/AnalyticsHomePage';
 import AnalyticsOrderTimeline from '../components/analytics/AnalyticsOrderTImeline';
-import AnalyticsCurrentVisits from '../components/analytics/AnalyticsCurrentVisits';
+import AnalyticsVisitsByCountry from '../components/analytics/AnalyticsVisitsByCountry';
 import AnalyticsWebsiteVisits from '../components/analytics/AnalyticsWebsiteVisits';
 import AnalyticsTrafficBySite from '../components/analytics/AnalyticsTrafficBySite';
 import AnalyticsCurrentSubject from '../components/analytics/AnalyticsCurrentSubject';
@@ -37,14 +37,14 @@ export default function GeneralAnalytics() {
             <AnalyticsUsers />
           </Grid>
 
-          <Grid item xs={12} md={6} lg={8}>
+          <Grid item xs={12}>
+            <AnalyticsVisitsByCountry />
+          </Grid>
+
+          <Grid item xs={12} md={6} lg={12}>
             <AnalyticsWebsiteVisits />
           </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
-            <AnalyticsCurrentVisits />
-          </Grid>
-
+          {/* 
           <Grid item xs={12} md={6} lg={8}>
             <AnalyticsConversionRates />
           </Grid>
@@ -63,7 +63,7 @@ export default function GeneralAnalytics() {
 
           <Grid item xs={12} md={6} lg={4}>
             <AnalyticsTrafficBySite />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </Page>
