@@ -6,15 +6,27 @@ import {
   useTheme,
   experimentalStyled as styled
 } from '@material-ui/core/styles';
-import { Card, CardHeader } from '@material-ui/core';
+import { Card, CardHeader, Button } from '@material-ui/core';
 // utils
 import { fNumber } from '../../utils/formatNumber';
 //
 import { BaseOptionChart } from '../charts';
 import { getVisitsCountries } from '../../api/metrics';
+import { getModifier } from '../../utils/formatStyles';
+import { TIME_UNITS } from '../../constants/dates';
 
 // ----------------------------------------------------------------------
 
+const TimeUnitBox = styled('div')({
+  width: '100%',
+  justifyContent: 'flex-end',
+  display: 'flex',
+  marginRight: '15px'
+});
+
+const TimeUnitButton = styled(Button)({
+  marginLeft: '25px'
+});
 const CHART_HEIGHT = 372;
 const LEGEND_HEIGHT = 72;
 
@@ -40,15 +52,16 @@ const CHART_DATA = [4344, 5435, 1443, 4443];
 
 export default function AnalyticsVisitsByCountry() {
   const [countries, setCountries] = useState({});
+  const [selectedTimeUnit, setSelectedTimeUnit] = useState('MONTH');
   const theme = useTheme();
 
   useEffect(() => {
     const getCountries = async () => {
-      const countries = await getVisitsCountries();
+      const countries = await getVisitsCountries(selectedTimeUnit);
       setCountries(countries);
     };
     getCountries();
-  }, []);
+  }, [selectedTimeUnit]);
 
   const colorOptions = [
     theme.palette.primary.main,
@@ -84,6 +97,19 @@ export default function AnalyticsVisitsByCountry() {
   return (
     <Card>
       <CardHeader title="Trafic by country" />
+      <TimeUnitBox>
+        {TIME_UNITS.map((button) => (
+          <TimeUnitButton
+            key={button.value}
+            onClick={() => {
+              setSelectedTimeUnit(button.value);
+            }}
+            variant={getModifier(button.value, selectedTimeUnit)}
+          >
+            {button.label}
+          </TimeUnitButton>
+        ))}
+      </TimeUnitBox>
       <ChartWrapperStyle dir="ltr">
         {Object.keys(countries).length > 0 && (
           <ReactApexChart

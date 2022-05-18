@@ -2,10 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { merge } from 'lodash';
 import ReactApexChart from 'react-apexcharts';
 // material
-import { Card, CardHeader, Box } from '@material-ui/core';
+import { Card, CardHeader, Box, Button } from '@material-ui/core';
+import { experimentalStyled as styled } from '@material-ui/core/styles';
 //
 import { BaseOptionChart } from '../charts';
 import { getMetricsByOrigin } from '../../api/metrics';
+import { TIME_UNITS } from '../../constants/dates';
+import { getModifier } from '../../utils/formatStyles';
+
+// ----------------------------------------------------------------------
+
+const TimeUnitBox = styled('div')({
+  width: '100%',
+  justifyContent: 'flex-end',
+  display: 'flex'
+});
+
+const TimeUnitButton = styled(Button)({
+  marginLeft: '25px'
+});
 
 // ----------------------------------------------------------------------
 
@@ -28,6 +43,7 @@ const CHART_DATA = [
 ];
 
 export default function AnalyticsWebsiteVisits() {
+  const [selectedTimeUnit, setSelectedTimeUnit] = useState('MONTH');
   const [trafficOrigin, setTrafficOrigin] = useState({
     data: [],
     labels: []
@@ -35,12 +51,11 @@ export default function AnalyticsWebsiteVisits() {
 
   useEffect(() => {
     const getMetrics = async () => {
-      const trafficData = await getMetricsByOrigin();
-      console.log(trafficData);
+      const trafficData = await getMetricsByOrigin(selectedTimeUnit);
       setTrafficOrigin(trafficData);
     };
     getMetrics();
-  }, []);
+  }, [selectedTimeUnit]);
   const chartOptions = merge(BaseOptionChart(), {
     stroke: { width: [0, 2, 3] },
     plotOptions: { bar: { columnWidth: '11%', borderRadius: 4 } },
@@ -65,6 +80,19 @@ export default function AnalyticsWebsiteVisits() {
     <Card>
       <CardHeader title="Website Visits" subheader="(+43%) than last year" />
       <Box sx={{ p: 3, pb: 1 }} dir="ltr">
+        <TimeUnitBox>
+          {TIME_UNITS.map((button) => (
+            <TimeUnitButton
+              key={button.value}
+              onClick={() => {
+                setSelectedTimeUnit(button.value);
+              }}
+              variant={getModifier(button.value, selectedTimeUnit)}
+            >
+              {button.label}
+            </TimeUnitButton>
+          ))}
+        </TimeUnitBox>
         <ReactApexChart
           type="line"
           series={trafficOrigin.data}
