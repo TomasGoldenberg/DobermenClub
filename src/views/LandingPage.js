@@ -15,6 +15,7 @@ import {
   PhotoSection
 } from '../components/landing-page';
 import { LOGnewVisit } from '../api/metrics';
+import AnalyticsVisitsByCountry from '../components/analytics/AnalyticsVisitsByCountry';
 
 const publicIp = require('public-ip');
 
@@ -48,6 +49,7 @@ export default function LandingPage() {
   return (
     <RootStyle title="DobermenClub | NFT COLLECTION" id="move_top">
       <LandingHero />
+      <AnalyticsVisitsByCountry version="PUBLIC" />
 
       <ContentStyle>
         {window.screen.width < 600 && (

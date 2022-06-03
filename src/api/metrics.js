@@ -109,9 +109,8 @@ export const getAllVisits = async () => {
   return allVisits;
 };
 
-export const getVisitsCountries = async (timeUnit) => {
+export const getVisitsCountries = async (timeUnit, isPublicRequest) => {
   const allVisits = await getAllVisits();
-
   const visits = Object.keys(allVisits).map((visitId) => allVisits[visitId]);
 
   let countries = {};
@@ -119,7 +118,9 @@ export const getVisitsCountries = async (timeUnit) => {
   visits.forEach((visit) => {
     const country = visit.country || 'NONE';
     const date = new Date(visit.created_at);
-    const meetsSearchTimeUnit = validateSearchTimeUnit(timeUnit, date);
+    const meetsSearchTimeUnit = isPublicRequest
+      ? true
+      : validateSearchTimeUnit(timeUnit, date);
     if (!meetsSearchTimeUnit) {
       return;
     }
