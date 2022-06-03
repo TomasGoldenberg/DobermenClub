@@ -59,7 +59,6 @@ export default function AnalyticsVisitsByCountry({ version }) {
   useEffect(() => {
     const getCountries = async () => {
       const countries = await getVisitsCountries(selectedTimeUnit, isPublic);
-      console.log(countries);
 
       setCountries(countries);
     };
