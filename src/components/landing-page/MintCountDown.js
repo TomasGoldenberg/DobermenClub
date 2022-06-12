@@ -185,7 +185,18 @@ export default function MintCountDown() {
     }, 1000);
 
     const getLatestNfts = async () => {
-      const items = await getCollectionAssets(DOBERMEN_ADDRESS, DOBERMEN_SLUG);
+      const items = [
+        {
+          name: 'Capo dober',
+          image_preview_url:
+            'https://lh3.googleusercontent.com/0AApKfunbYZVIWQH-cCXSp13dI0ZK78q6fm5K6hb0dVvp8kUqxseEqoaIK1AtB05oaQZ0-J80RaUYSVMGlKvSJnPlMBa1I7xPqby5w',
+          traits: [
+            { trait_type: 'RARETY', value: 'RARE' },
+            { trait_type: 'POWER', value: 'SUPERVISION' },
+            { trait_type: 'ACCESSORIES', value: 'HAT' }
+          ]
+        }
+      ]; // await getCollectionAssets(DOBERMEN_ADDRESS, DOBERMEN_SLUG);
       setLatestAssets(items);
     };
     getLatestNfts();

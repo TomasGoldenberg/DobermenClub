@@ -47,8 +47,8 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 const HeroOverlayStyle = styled(motion.img)({
   zIndex: 9,
-  width: '100%',
-  height: '100%',
+  width: '100vh',
+  height: '100vh',
   objectFit: 'cover',
   position: 'absolute'
 });
@@ -76,7 +76,7 @@ export default function LandingHero() {
       <RootStyle initial="initial" animate="animate" variants={varWrapEnter}>
         <HeroOverlayStyle
           alt="overlay"
-          src="https://i.ibb.co/z4jTcdC/DOBER-girl-face-02-Artboard-4.png"
+          src="https://i.ibb.co/BKCGZP1/hero.jpg"
           variants={varFadeIn}
         />
         {/* 
