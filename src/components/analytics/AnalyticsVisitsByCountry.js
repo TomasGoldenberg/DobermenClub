@@ -97,7 +97,16 @@ export default function AnalyticsVisitsByCountry({ version }) {
   });
 
   return (
-    <Card>
+    <Card
+      style={
+        isPublic
+          ? {
+              backgroundImage: `url("https://i.ibb.co/y0ScCQG/Untitled-19-09-Artboard-11.png")`,
+              backgroundSize: 'cover'
+            }
+          : {}
+      }
+    >
       <CardHeader title="Trafic by country" />
       {!isPublic && (
         <TimeUnitBox>

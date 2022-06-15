@@ -1,6 +1,12 @@
 import React from 'react';
 
-const LedBannerItem = ({ image, text, flexDirection, onlyText }) => {
+const LedBannerItem = ({
+  image,
+  primary,
+  secondary,
+  flexDirection,
+  onlyText
+}) => {
   const flex = 'yes';
   return (
     <div
@@ -10,20 +16,28 @@ const LedBannerItem = ({ image, text, flexDirection, onlyText }) => {
         display: 'flex',
         flexDirection: flexDirection || 'row',
         alignItems: 'center',
-        justifyContent: onlyText ? 'center' : 'space-around'
+        justifyContent: onlyText ? 'center' : 'space-evenly'
       }}
     >
       <img
         src="https://i.ibb.co/qxrmMSj/Untitled-19-07-Artboard-8.png"
         alt="led"
-        style={{ position: 'absolute', zIndex: 99999 }}
+        style={{
+          width: '95%',
+          position: 'absolute',
+          zIndex: 99999
+        }}
       />
       {onlyText ? (
-        <>{text}</>
+        <>{primary}</>
       ) : (
         <>
-          {text}
-          <img height={200} alt="images" src={image} />
+          <div>
+            <strong>{primary}</strong>
+            {secondary}
+          </div>
+
+          <img height={150} alt="images" src={image} />
         </>
       )}
     </div>

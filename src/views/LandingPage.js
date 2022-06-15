@@ -51,28 +51,40 @@ export default function LandingPage() {
 
   const BANNERS = [
     {
-      text: (
-        <p>
-          What is an NFT Anyway ? <br /> Any asset with value{' '}
+      primary: (
+        <p style={{ fontFamily: 'system-ui', fontSize: '24px' }}>
+          What is an NFT Anyway ?
+          <strong style={{ fontSize: '34px' }}>
+            {' '}
+            <br /> Any asset with value{' '}
+          </strong>
         </p>
       ),
       flexDirection: 'row-reverse',
       image: 'https://i.ibb.co/YNghHZw/Untitled-19-11-Artboard-13.png'
     },
     {
-      text: (
-        <p>
-          Represented by a unique <br />
-          entry on a <strong>BLOCKCHAIN</strong>{' '}
+      primary: (
+        <p
+          style={{
+            fontFamily: 'system-ui',
+            fontSize: '24px',
+            marginLeft: '50px'
+          }}
+        >
+          Represented by a unique
+          <br />
+          <strong style={{ fontSize: '34px' }}> entry on a BLOCKCHAIN</strong>
         </p>
       ),
       flexDirection: 'row',
       image: 'https://i.ibb.co/Tg4kZDn/Untitled-19-10-Artboard-12.png'
     },
     {
-      text: (
-        <p>
-          <strong>PROVE OWNERSHIP</strong> <br /> Sell or trade the asset
+      primary: (
+        <p style={{ fontFamily: 'system-ui', fontSize: '24px' }}>
+          PROVE OWNERSHIP <br />{' '}
+          <strong style={{ fontSize: '34px' }}> Sell or trade the asset</strong>
         </p>
       ),
       flexDirection: 'row-reverse',
@@ -80,9 +92,11 @@ export default function LandingPage() {
     },
     {
       onlyText: true,
-      text: (
+      primary: (
         <h2>
-          <strong>BUY YOUR OWN DOBER NFT JUST HERE</strong>
+          <strong style={{ fontSize: '34px' }}>
+            BUY YOUR OWN DOBER NFT JUST HERE
+          </strong>
         </h2>
       )
     }
@@ -91,11 +105,12 @@ export default function LandingPage() {
   return (
     <RootStyle title="DobermenClub | NFT COLLECTION" id="move_top">
       <ContentStyle>
-        <PhotoSection image="https://i.ibb.co/BKCGZP1/hero.jpg" />
+        <PhotoSection image="https://i.ibb.co/DRS8xd8/IMG-1396.jpg" />
 
         <div
           style={{
-            marginTop: '-540px',
+            marginTop: '40px',
+            marginBottom: '40px',
             justifyContent: 'space-around',
             display: 'flex',
             alignItems: 'center'
@@ -136,14 +151,28 @@ export default function LandingPage() {
         )}
         <PhotoSection image="https://i.ibb.co/mC0c2Hv/subhero.jpg" />
 
-        {BANNERS.map((banner) => (
-          <LedBannerItem key={banner.image} {...banner} />
-        ))}
+        <div
+          style={{
+            backgroundImage: `url("https://i.ibb.co/y0ScCQG/Untitled-19-09-Artboard-11.png")`,
+            backgroundSize: 'cover'
+          }}
+        >
+          {BANNERS.map((banner) => (
+            <LedBannerItem key={banner.image} {...banner} />
+          ))}
+        </div>
         <PhotoSection image="https://i.ibb.co/Fwk95dw/Untitled-19-13-Artboard-15.png" />
 
         <AnalyticsVisitsByCountry version="PUBLIC" />
         <NextMilestone />
-        <MintCountDown />
+        <div
+          style={{
+            backgroundImage: `url("https://i.ibb.co/y0ScCQG/Untitled-19-09-Artboard-11.png")`,
+            backgroundSize: 'cover'
+          }}
+        >
+          <MintCountDown />
+        </div>
         <PhotoSection image="https://i.ibb.co/Mh6S0QF/1882-01-Artboard-2-2.png" />
         {window.screen.width > 600 && <LandingAdvertisement />}
         <LandingRoadmap />
