@@ -195,6 +195,26 @@ export default function MintCountDown() {
             { trait_type: 'POWER', value: 'SUPERVISION' },
             { trait_type: 'ACCESSORIES', value: 'HAT' }
           ]
+        },
+        {
+          name: 'Capo dober',
+          image_preview_url:
+            'https://lh3.googleusercontent.com/0AApKfunbYZVIWQH-cCXSp13dI0ZK78q6fm5K6hb0dVvp8kUqxseEqoaIK1AtB05oaQZ0-J80RaUYSVMGlKvSJnPlMBa1I7xPqby5w',
+          traits: [
+            { trait_type: 'RARETY', value: 'RARE' },
+            { trait_type: 'POWER', value: 'SUPERVISION' },
+            { trait_type: 'ACCESSORIES', value: 'HAT' }
+          ]
+        },
+        {
+          name: 'Capo dober',
+          image_preview_url:
+            'https://lh3.googleusercontent.com/0AApKfunbYZVIWQH-cCXSp13dI0ZK78q6fm5K6hb0dVvp8kUqxseEqoaIK1AtB05oaQZ0-J80RaUYSVMGlKvSJnPlMBa1I7xPqby5w',
+          traits: [
+            { trait_type: 'RARETY', value: 'RARE' },
+            { trait_type: 'POWER', value: 'SUPERVISION' },
+            { trait_type: 'ACCESSORIES', value: 'HAT' }
+          ]
         }
       ]; // await getCollectionAssets(DOBERMEN_ADDRESS, DOBERMEN_SLUG);
       setLatestAssets(items);
@@ -258,13 +278,18 @@ export default function MintCountDown() {
               gutterBottom
               variant="overline"
               align="center"
-              sx={{ color: 'text.secondary', display: 'block' }}
+              sx={{ color: theme.palette.primary.main, display: 'block' }}
             >
               Latest Mints
             </Typography>
           </MotionInView>
           <MotionInView variants={varFadeInDown}>
-            <Typography variant="h2" align="center" sx={{ color: '#25C369' }}>
+            <Typography
+              variant="h2"
+              align="center"
+              e
+              sx={{ color: theme.palette.primary.light }}
+            >
               Next Release in : {countDown}
             </Typography>
           </MotionInView>
@@ -301,6 +326,9 @@ export default function MintCountDown() {
               <Grid key={index} item xs={12} md={4}>
                 <MotionInView variants={varFadeInUp}>
                   <CardStyle
+                    style={{
+                      backgroundColor: 'rgb(245,245,245,0.1)'
+                    }}
                     className={
                       (index === 0 && 'cardLeft') ||
                       (index === 1 && 'cardCenter')
