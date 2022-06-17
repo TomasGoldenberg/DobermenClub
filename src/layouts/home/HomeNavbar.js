@@ -32,10 +32,10 @@ import MenuPopover from '../../components/MenuPopover';
 
 const MENU_LINKS = [
   { title: 'Home', icon: homeFill, href: '/' },
-  { title: 'Next Release', icon: roundSpeed, href: '/#release' },
-  { title: 'RoadMap', icon: roundSpeed, href: '/#roadmap' },
-  { title: 'FAQ', icon: roundSpeed, href: '/#faq' },
-  { title: 'Advertising', icon: roundSpeed, href: '/#advertising' }
+  { title: 'Most Viewed', icon: roundSpeed, href: '/#release' },
+  // { title: 'RoadMap', icon: roundSpeed, href: '/#roadmap' },
+  { title: 'FAQ', icon: roundSpeed, href: '/#faq' }
+  // { title: 'Advertising', icon: roundSpeed, href: '/#advertising' }
 ];
 
 const APP_BAR_MOBILE = 64;

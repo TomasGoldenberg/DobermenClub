@@ -8,3 +8,4 @@ export { default as MintCountDown } from './MintCountDown';
 export { default as PhotoSection } from './PhotoSection';
 export { default as NextMilestone } from './NextMilestone';
 export { default as LedBannerItem } from './LedBannerItem';
+export { default as AnimatedSection } from './AnimatedSection';

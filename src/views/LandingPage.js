@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
-import { Button } from '@material-ui/core';
+import { Button, useMediaQuery } from '@material-ui/core';
 // material
-import { experimentalStyled as styled } from '@material-ui/core/styles';
+import {
+  useTheme,
+  experimentalStyled as styled
+} from '@material-ui/core/styles';
 // components
 import Page from '../components/Page';
 import {
@@ -13,11 +16,13 @@ import {
   LandingAdvertisement,
   LandingRoadmap,
   LandingHugePackElements,
-  PhotoSection
+  PhotoSection,
+  AnimatedSection
 } from '../components/landing-page';
 import { LOGnewVisit } from '../api/metrics';
 import AnalyticsVisitsByCountry from '../components/analytics/AnalyticsVisitsByCountry';
 import 'animate.css';
+import { PATH_HOME } from '../routes/paths';
 
 const publicIp = require('public-ip');
 
@@ -36,6 +41,10 @@ const ContentStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function LandingPage() {
+  const theme = useTheme();
+  const isMobile = !useMediaQuery(theme.breakpoints.up('sm'));
+  const isMedium = useMediaQuery(theme.breakpoints.up('md'));
+
   useEffect(() => {
     const logMetric = async (type) => {
       const ip = await publicIp.v4();
@@ -52,9 +61,14 @@ export default function LandingPage() {
   const BANNERS = [
     {
       primary: (
-        <p style={{ fontFamily: 'system-ui', fontSize: '24px' }}>
+        <p
+          style={{
+            fontFamily: 'system-ui',
+            fontSize: isMobile ? '20px' : '24px'
+          }}
+        >
           What is an NFT Anyway ?
-          <strong style={{ fontSize: '34px' }}>
+          <strong style={{ fontSize: isMobile ? '30px' : '34px' }}>
             {' '}
             <br /> Any asset with value{' '}
           </strong>
@@ -68,23 +82,35 @@ export default function LandingPage() {
         <p
           style={{
             fontFamily: 'system-ui',
-            fontSize: '24px',
+            fontSize: isMobile ? '20px' : '24px',
             marginLeft: '50px'
           }}
         >
-          Represented by a unique
+          Represented by a unique {isMobile && 'entry'}
           <br />
-          <strong style={{ fontSize: '34px' }}> entry on a BLOCKCHAIN</strong>
+          <strong style={{ fontSize: isMobile ? '30px' : '34px' }}>
+            {' '}
+            {!isMobile && 'entry'} on a BLOCKCHAIN
+          </strong>
         </p>
       ),
       flexDirection: 'row',
+      shortenImage: isMobile,
       image: 'https://i.ibb.co/Tg4kZDn/Untitled-19-10-Artboard-12.png'
     },
     {
       primary: (
-        <p style={{ fontFamily: 'system-ui', fontSize: '24px' }}>
+        <p
+          style={{
+            fontFamily: 'system-ui',
+            fontSize: isMobile ? '20px' : '24px'
+          }}
+        >
           PROVE OWNERSHIP <br />{' '}
-          <strong style={{ fontSize: '34px' }}> Sell or trade the asset</strong>
+          <strong style={{ fontSize: isMobile ? '30px' : '34px' }}>
+            {' '}
+            Sell or trade the asset
+          </strong>
         </p>
       ),
       flexDirection: 'row-reverse',
@@ -94,8 +120,8 @@ export default function LandingPage() {
       onlyText: true,
       primary: (
         <h2>
-          <strong style={{ fontSize: '34px' }}>
-            BUY YOUR OWN DOBER NFT JUST HERE
+          <strong style={{ fontSize: isMobile ? '29px' : '34px' }}>
+            BUY YOUR OWN DOBER{isMobile && <br />} NFT JUST HERE
           </strong>
         </h2>
       )
@@ -106,49 +132,8 @@ export default function LandingPage() {
     <RootStyle title="DobermenClub | NFT COLLECTION" id="move_top">
       <ContentStyle>
         <PhotoSection image="https://i.ibb.co/DRS8xd8/IMG-1396.jpg" />
+        <AnimatedSection />
 
-        <div
-          style={{
-            marginTop: '40px',
-            marginBottom: '40px',
-            justifyContent: 'space-around',
-            display: 'flex',
-            alignItems: 'center'
-          }}
-        >
-          <div>
-            <img
-              width={300}
-              style={{ marginLeft: '120px' }}
-              height={250}
-              className="animate__animated animate__bounce animate__infinite animate__slow"
-              src="https://i.ibb.co/VjVNy4k/Untitled-19-1-03-Artboard-3.png"
-              alt="basket"
-            />
-            <img
-              className="animate__animated animate__pulse animate__infinite"
-              src="https://i.ibb.co/WcPwcDw/Untitled-19-1-02-Artboard-2.png"
-              alt="basket"
-              width={300}
-              style={{ marginLeft: '126px', marginTop: '-156px' }}
-              height={250}
-            />
-          </div>
-
-          <div>
-            <h1 style={{ marginBottom: '20px', fontWeight: 'bold' }}>
-              Visit our OPENSEA store !
-            </h1>
-            <p style={{ marginBottom: '15px' }}>
-              Visit our official store to adquire one of the <br /> trendiest
-              projects of the month !
-            </p>
-            <Button variant="contained">CHECK IT OUT !</Button>
-          </div>
-        </div>
-        {window.screen.width < 600 && (
-          <PhotoSection image="https://i.ibb.co/BKCGZP1/hero.jpg" />
-        )}
         <PhotoSection image="https://i.ibb.co/mC0c2Hv/subhero.jpg" />
 
         <div
@@ -173,12 +158,9 @@ export default function LandingPage() {
         >
           <MintCountDown />
         </div>
-        <PhotoSection image="https://i.ibb.co/Mh6S0QF/1882-01-Artboard-2-2.png" />
-        {window.screen.width > 600 && <LandingAdvertisement />}
-        <LandingRoadmap />
 
         <LandingHugePackElements />
-        <LandingDarkMode />
+        <LandingDarkMode isMobile={isMobile} />
         <PhotoSection
           hasButton
           link="https://discord.com/invite/z3PbKfPwHh/"
