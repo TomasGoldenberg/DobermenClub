@@ -88,6 +88,7 @@ export default function LandingHugePackElements() {
   return (
     <Grid
       item
+      id="faq"
       xs={12}
       style={{
         display: 'flex',

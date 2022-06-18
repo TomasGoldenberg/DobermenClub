@@ -33,7 +33,7 @@ import MenuPopover from '../../components/MenuPopover';
 const MENU_LINKS = [
   { title: 'Home', icon: homeFill, href: '/' },
   { title: 'Most Viewed', icon: roundSpeed, href: '/#release' },
-  // { title: 'RoadMap', icon: roundSpeed, href: '/#roadmap' },
+  { title: 'Team', icon: roundSpeed, href: '/#team' },
   { title: 'FAQ', icon: roundSpeed, href: '/#faq' }
   // { title: 'Advertising', icon: roundSpeed, href: '/#advertising' }
 ];

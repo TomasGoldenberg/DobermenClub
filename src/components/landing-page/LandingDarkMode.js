@@ -58,14 +58,14 @@ export default function LandingDarkMode({ isMobile }) {
     },
     {
       image:
-        'https://lh3.googleusercontent.com/0AApKfunbYZVIWQH-cCXSp13dI0ZK78q6fm5K6hb0dVvp8kUqxseEqoaIK1AtB05oaQZ0-J80RaUYSVMGlKvSJnPlMBa1I7xPqby5w',
-      name: 'DOBER PAUL',
-      role: 'Marketing'
+        'https://i.ibb.co/8z1PbCJ/13-D89-CB6-DD59-43-D8-B59-C-6-D9119893394.jpg',
+      name: 'DOBER LESLIE',
+      role: 'Design Head'
     }
   ];
   return (
     <RootStyle
-      id="faq"
+      id="team"
       style={isMobile ? { justifyContent: 'center', display: 'flex' } : {}}
     >
       <ContentStyle container style={{ justifyContent: 'space-around' }}>
