@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
+import { Button, useMediaQuery } from '@material-ui/core';
 // material
-import { experimentalStyled as styled } from '@material-ui/core/styles';
+import {
+  useTheme,
+  experimentalStyled as styled
+} from '@material-ui/core/styles';
 // components
 import Page from '../components/Page';
 import {
-  LandingHero,
+  LedBannerItem,
   LandingFooter,
   MintCountDown,
   NextMilestone,
@@ -12,9 +16,13 @@ import {
   LandingAdvertisement,
   LandingRoadmap,
   LandingHugePackElements,
-  PhotoSection
+  PhotoSection,
+  AnimatedSection
 } from '../components/landing-page';
 import { LOGnewVisit } from '../api/metrics';
+import AnalyticsVisitsByCountry from '../components/analytics/AnalyticsVisitsByCountry';
+import 'animate.css';
+import { PATH_HOME } from '../routes/paths';
 
 const publicIp = require('public-ip');
 
@@ -33,6 +41,10 @@ const ContentStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function LandingPage() {
+  const theme = useTheme();
+  const isMobile = !useMediaQuery(theme.breakpoints.up('sm'));
+  const isMedium = useMediaQuery(theme.breakpoints.up('md'));
+
   useEffect(() => {
     const logMetric = async (type) => {
       const ip = await publicIp.v4();
@@ -45,22 +57,110 @@ export default function LandingPage() {
 
     logMetric('home_visits');
   }, []);
+
+  const BANNERS = [
+    {
+      primary: (
+        <p
+          style={{
+            fontFamily: 'system-ui',
+            fontSize: isMobile ? '20px' : '24px'
+          }}
+        >
+          What is an NFT Anyway ?
+          <strong style={{ fontSize: isMobile ? '30px' : '34px' }}>
+            {' '}
+            <br /> Any asset with value{' '}
+          </strong>
+        </p>
+      ),
+      flexDirection: 'row-reverse',
+      image: 'https://i.ibb.co/YNghHZw/Untitled-19-11-Artboard-13.png'
+    },
+    {
+      primary: (
+        <p
+          style={{
+            fontFamily: 'system-ui',
+            fontSize: isMobile ? '20px' : '24px',
+            marginLeft: '50px'
+          }}
+        >
+          Represented by a unique {isMobile && 'entry'}
+          <br />
+          <strong style={{ fontSize: isMobile ? '30px' : '34px' }}>
+            {' '}
+            {!isMobile && 'entry'} on a BLOCKCHAIN
+          </strong>
+        </p>
+      ),
+      flexDirection: 'row',
+      shortenImage: isMobile,
+      image: 'https://i.ibb.co/Tg4kZDn/Untitled-19-10-Artboard-12.png'
+    },
+    {
+      primary: (
+        <p
+          style={{
+            fontFamily: 'system-ui',
+            fontSize: isMobile ? '20px' : '24px'
+          }}
+        >
+          PROVE OWNERSHIP <br />{' '}
+          <strong style={{ fontSize: isMobile ? '30px' : '34px' }}>
+            {' '}
+            Sell or trade the asset
+          </strong>
+        </p>
+      ),
+      flexDirection: 'row-reverse',
+      image: 'https://i.ibb.co/DYyNWMm/Untitled-19-12-Artboard-14.png'
+    },
+    {
+      onlyText: true,
+      primary: (
+        <h2>
+          <strong style={{ fontSize: isMobile ? '29px' : '34px' }}>
+            BUY YOUR OWN DOBER{isMobile && <br />} NFT JUST HERE
+          </strong>
+        </h2>
+      )
+    }
+  ];
+
   return (
     <RootStyle title="DobermenClub | NFT COLLECTION" id="move_top">
-      <LandingHero />
-
       <ContentStyle>
-        {window.screen.width < 600 && (
-          <PhotoSection image="https://i.ibb.co/z4jTcdC/DOBER-girl-face-02-Artboard-4.png" />
-        )}
+        <PhotoSection image="https://i.ibb.co/DRS8xd8/IMG-1396.jpg" />
+        <AnimatedSection />
+
+        <PhotoSection image="https://i.ibb.co/mC0c2Hv/subhero.jpg" />
+
+        <div
+          style={{
+            backgroundImage: `url("https://i.ibb.co/y0ScCQG/Untitled-19-09-Artboard-11.png")`,
+            backgroundSize: 'cover'
+          }}
+        >
+          {BANNERS.map((banner) => (
+            <LedBannerItem key={banner.image} {...banner} />
+          ))}
+        </div>
+        <PhotoSection image="https://i.ibb.co/Fwk95dw/Untitled-19-13-Artboard-15.png" />
+
+        <AnalyticsVisitsByCountry version="PUBLIC" />
         <NextMilestone />
-        <MintCountDown />
-        <PhotoSection image="https://i.ibb.co/Mh6S0QF/1882-01-Artboard-2-2.png" />
-        {window.screen.width > 600 && <LandingAdvertisement />}
-        <LandingRoadmap />
+        <div
+          style={{
+            backgroundImage: `url("https://i.ibb.co/y0ScCQG/Untitled-19-09-Artboard-11.png")`,
+            backgroundSize: 'cover'
+          }}
+        >
+          <MintCountDown />
+        </div>
 
         <LandingHugePackElements />
-        <LandingDarkMode />
+        <LandingDarkMode isMobile={isMobile} />
         <PhotoSection
           hasButton
           link="https://discord.com/invite/z3PbKfPwHh/"

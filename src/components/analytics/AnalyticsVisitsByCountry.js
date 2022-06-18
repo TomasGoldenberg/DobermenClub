@@ -6,15 +6,27 @@ import {
   useTheme,
   experimentalStyled as styled
 } from '@material-ui/core/styles';
-import { Card, CardHeader } from '@material-ui/core';
+import { Card, CardHeader, Button } from '@material-ui/core';
 // utils
 import { fNumber } from '../../utils/formatNumber';
 //
 import { BaseOptionChart } from '../charts';
 import { getVisitsCountries } from '../../api/metrics';
+import { getModifier } from '../../utils/formatStyles';
+import { TIME_UNITS } from '../../constants/dates';
 
 // ----------------------------------------------------------------------
 
+const TimeUnitBox = styled('div')({
+  width: '100%',
+  justifyContent: 'flex-end',
+  display: 'flex',
+  marginRight: '15px'
+});
+
+const TimeUnitButton = styled(Button)({
+  marginLeft: '25px'
+});
 const CHART_HEIGHT = 372;
 const LEGEND_HEIGHT = 72;
 
@@ -38,17 +50,20 @@ const ChartWrapperStyle = styled('div')(({ theme }) => ({
 
 const CHART_DATA = [4344, 5435, 1443, 4443];
 
-export default function AnalyticsVisitsByCountry() {
+export default function AnalyticsVisitsByCountry({ version }) {
   const [countries, setCountries] = useState({});
+  const [selectedTimeUnit, setSelectedTimeUnit] = useState('MONTH');
   const theme = useTheme();
+  const [isPublic] = useState(version === 'PUBLIC');
 
   useEffect(() => {
     const getCountries = async () => {
-      const countries = await getVisitsCountries();
+      const countries = await getVisitsCountries(selectedTimeUnit, isPublic);
+
       setCountries(countries);
     };
     getCountries();
-  }, []);
+  }, [selectedTimeUnit]);
 
   const colorOptions = [
     theme.palette.primary.main,
@@ -70,7 +85,7 @@ export default function AnalyticsVisitsByCountry() {
     tooltip: {
       fillSeriesColor: false,
       y: {
-        formatter: (seriesName) => fNumber(seriesName),
+        formatter: (seriesName) => (isPublic ? '' : fNumber(seriesName)),
         title: {
           formatter: (seriesName) => `#${seriesName}`
         }
@@ -82,8 +97,32 @@ export default function AnalyticsVisitsByCountry() {
   });
 
   return (
-    <Card>
+    <Card
+      style={
+        isPublic
+          ? {
+              backgroundImage: `url("https://i.ibb.co/y0ScCQG/Untitled-19-09-Artboard-11.png")`,
+              backgroundSize: 'cover'
+            }
+          : {}
+      }
+    >
       <CardHeader title="Trafic by country" />
+      {!isPublic && (
+        <TimeUnitBox>
+          {TIME_UNITS.map((button) => (
+            <TimeUnitButton
+              key={button.value}
+              onClick={() => {
+                setSelectedTimeUnit(button.value);
+              }}
+              variant={getModifier(button.value, selectedTimeUnit)}
+            >
+              {button.label}
+            </TimeUnitButton>
+          ))}
+        </TimeUnitBox>
+      )}
       <ChartWrapperStyle dir="ltr">
         {Object.keys(countries).length > 0 && (
           <ReactApexChart

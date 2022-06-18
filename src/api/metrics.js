@@ -3,7 +3,7 @@ import 'firebase/database';
 import 'firebase/auth';
 import { firebaseConfig } from '../config';
 import { getIpLocation } from '../utils/getIpLocation';
-import { handleZeros } from '../utils/formatDate';
+import { handleZeros, validateSearchTimeUnit } from '../utils/formatDate';
 import { MONTHS } from '../constants/dates';
 
 firebase.initializeApp(firebaseConfig);
@@ -109,15 +109,21 @@ export const getAllVisits = async () => {
   return allVisits;
 };
 
-export const getVisitsCountries = async () => {
+export const getVisitsCountries = async (timeUnit, isPublicRequest) => {
   const allVisits = await getAllVisits();
-
   const visits = Object.keys(allVisits).map((visitId) => allVisits[visitId]);
 
   let countries = {};
 
   visits.forEach((visit) => {
     const country = visit.country || 'NONE';
+    const date = new Date(visit.created_at);
+    const meetsSearchTimeUnit = isPublicRequest
+      ? true
+      : validateSearchTimeUnit(timeUnit, date);
+    if (!meetsSearchTimeUnit) {
+      return;
+    }
 
     countries = {
       ...countries,
@@ -133,7 +139,7 @@ export const getVisitsCountries = async () => {
   };
 };
 
-export const getMetricsByOrigin = async () => {
+export const getMetricsByOrigin = async (timeUnit) => {
   const allVisits = await getAllVisits();
 
   const visits = Object.keys(allVisits).map((visitId) => allVisits[visitId]);
@@ -160,12 +166,13 @@ export const getMetricsByOrigin = async () => {
 
   visits.forEach((item) => {
     const date = new Date(item.created_at);
-    if (!date) {
+    const meetsSearchTimeUnit = validateSearchTimeUnit(timeUnit, date);
+    if (!date || !meetsSearchTimeUnit) {
       return;
     }
     const isOrganic = item.promoter === 'NONE';
     const day = date.getDate();
-    const month = MONTHS[date.getMonth()];
+    const month = MONTHS[date?.getMonth()];
     const dateItemLabel = `${month}, ${handleZeros(day)}`;
 
     const existingValue = dates[dateItemLabel] || {};
@@ -203,7 +210,7 @@ export const getMetricsByOrigin = async () => {
   datesArray.forEach((date) => {
     organic.data.push(date.organic);
     promoters.data.push(date.promoter);
-    example.data.push(1);
+    example.data.push(0.1);
   });
 
   const result = {

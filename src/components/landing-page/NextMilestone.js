@@ -157,6 +157,8 @@ const NextMilestone = () => {
     }, 1000);
   }, []);
 
+  return <></>;
+  /* 
   return (
     <Box>
       <img
@@ -216,7 +218,7 @@ const NextMilestone = () => {
         )}
       </Box>
     </Box>
-  );
+  ); */
 };
 
 export default NextMilestone;

@@ -30,7 +30,7 @@ const ContentStyle = styled('div')(({ theme }) => ({
 }));
 
 // ----------------------------------------------------------------------
-export default function LandingDarkMode() {
+export default function LandingDarkMode({ isMobile }) {
   const MEMBERS = [
     {
       image:
@@ -55,11 +55,20 @@ export default function LandingDarkMode() {
         'https://lh3.googleusercontent.com/0AApKfunbYZVIWQH-cCXSp13dI0ZK78q6fm5K6hb0dVvp8kUqxseEqoaIK1AtB05oaQZ0-J80RaUYSVMGlKvSJnPlMBa1I7xPqby5w',
       name: 'DOBER PAUL',
       role: 'Marketing'
+    },
+    {
+      image:
+        'https://i.ibb.co/8z1PbCJ/13-D89-CB6-DD59-43-D8-B59-C-6-D9119893394.jpg',
+      name: 'DOBER LESLIE',
+      role: 'Design Head'
     }
   ];
   return (
-    <RootStyle id="faq">
-      <ContentStyle container style={{}}>
+    <RootStyle
+      id="team"
+      style={isMobile ? { justifyContent: 'center', display: 'flex' } : {}}
+    >
+      <ContentStyle container style={{ justifyContent: 'space-around' }}>
         {MEMBERS.map((member, index) => (
           <Grid
             key={index}
@@ -67,18 +76,18 @@ export default function LandingDarkMode() {
               objectFit: 'cover'
             }}
           >
-            <img src={member.image} alt="member" height="316" />
+            <img src={member.image} alt="member" width="217" height="216" />
             <Button
               variant="contained"
               style={{
-                width: '317px',
+                width: '217px',
                 borderRadius: '0px',
                 height: '90px'
               }}
             >
               <Box style={{ display: 'flex', flexDirection: 'column' }}>
                 <Typography
-                  style={{ fontWeight: 'bold' }}
+                  style={{ fontWeight: 'bold', fontSize: '24px' }}
                   variant="h3"
                   paragraph
                 >

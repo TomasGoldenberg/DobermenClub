@@ -88,6 +88,7 @@ export default function LandingHugePackElements() {
   return (
     <Grid
       item
+      id="faq"
       xs={12}
       style={{
         display: 'flex',
@@ -108,11 +109,17 @@ export default function LandingHugePackElements() {
 
         <MotionInView variants={textAnimate}>
           <Typography variant="h2" paragraph>
-            DOBERMEN CLUB MEMBERS
+            DOBER GIRLS{' '}
           </Typography>
         </MotionInView>
-
-        <CarrouselStyledMini>
+        <Box>
+          <img
+            alt="gif"
+            style={{ marginRight: '100px', marginTop: '20px' }}
+            src="https://i.ibb.co/hFRdvyb/giphy.gif"
+          />
+        </Box>
+        {/*       <CarrouselStyledMini>
           {assets.map((asset, index) => (
             <Card
               key={index}
@@ -131,14 +138,14 @@ export default function LandingHugePackElements() {
                   <Typography gutterBottom variant="h5" component="div">
                     {asset.name}
                   </Typography>
-                  {/*  <Typography variant="body2" color="text.secondary">
-                    Minted at {asset?.sell_orders[0]?.created_date.slice(0, 10)}
-                  </Typography> */}
+                  ////  <Typography variant="body2" color="text.secondary">
+                  ////  Minted at {asset?.sell_orders[0]?.created_date.slice(0, 10)}
+                /////  </Typography> 
                 </CardContent>
               </CardActionArea>
             </Card>
           ))}
-        </CarrouselStyledMini>
+        </CarrouselStyledMini> */}
       </Grid>
       <Grid xs={12} sm={12} md={12} sx={{ pl: upSm ? 10 : 0 }}>
         <MotionInView variants={textAnimate}>
