@@ -38,7 +38,7 @@ export default function GeneralAnalytics() {
           </Grid>
 
           <Grid item xs={12}>
-            <AnalyticsVisitsByCountry />
+            <AnalyticsVisitsByCountry version="INTERNAL" />
           </Grid>
 
           <Grid item xs={12} md={6} lg={12}>

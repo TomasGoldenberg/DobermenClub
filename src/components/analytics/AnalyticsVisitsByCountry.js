@@ -50,14 +50,16 @@ const ChartWrapperStyle = styled('div')(({ theme }) => ({
 
 const CHART_DATA = [4344, 5435, 1443, 4443];
 
-export default function AnalyticsVisitsByCountry() {
+export default function AnalyticsVisitsByCountry({ version }) {
   const [countries, setCountries] = useState({});
   const [selectedTimeUnit, setSelectedTimeUnit] = useState('MONTH');
   const theme = useTheme();
+  const [isPublic] = useState(version === 'PUBLIC');
 
   useEffect(() => {
     const getCountries = async () => {
-      const countries = await getVisitsCountries(selectedTimeUnit);
+      const countries = await getVisitsCountries(selectedTimeUnit, isPublic);
+
       setCountries(countries);
     };
     getCountries();
@@ -83,7 +85,7 @@ export default function AnalyticsVisitsByCountry() {
     tooltip: {
       fillSeriesColor: false,
       y: {
-        formatter: (seriesName) => fNumber(seriesName),
+        formatter: (seriesName) => (isPublic ? '' : fNumber(seriesName)),
         title: {
           formatter: (seriesName) => `#${seriesName}`
         }
@@ -95,21 +97,32 @@ export default function AnalyticsVisitsByCountry() {
   });
 
   return (
-    <Card>
+    <Card
+      style={
+        isPublic
+          ? {
+              backgroundImage: `url("https://i.ibb.co/y0ScCQG/Untitled-19-09-Artboard-11.png")`,
+              backgroundSize: 'cover'
+            }
+          : {}
+      }
+    >
       <CardHeader title="Trafic by country" />
-      <TimeUnitBox>
-        {TIME_UNITS.map((button) => (
-          <TimeUnitButton
-            key={button.value}
-            onClick={() => {
-              setSelectedTimeUnit(button.value);
-            }}
-            variant={getModifier(button.value, selectedTimeUnit)}
-          >
-            {button.label}
-          </TimeUnitButton>
-        ))}
-      </TimeUnitBox>
+      {!isPublic && (
+        <TimeUnitBox>
+          {TIME_UNITS.map((button) => (
+            <TimeUnitButton
+              key={button.value}
+              onClick={() => {
+                setSelectedTimeUnit(button.value);
+              }}
+              variant={getModifier(button.value, selectedTimeUnit)}
+            >
+              {button.label}
+            </TimeUnitButton>
+          ))}
+        </TimeUnitBox>
+      )}
       <ChartWrapperStyle dir="ltr">
         {Object.keys(countries).length > 0 && (
           <ReactApexChart

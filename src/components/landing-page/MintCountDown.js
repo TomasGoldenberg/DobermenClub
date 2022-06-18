@@ -185,7 +185,35 @@ export default function MintCountDown() {
     }, 1000);
 
     const getLatestNfts = async () => {
-      const items = await getCollectionAssets(DOBERMEN_ADDRESS, DOBERMEN_SLUG);
+      const items = [
+        {
+          name: 'Capo dober',
+          image_preview_url: 'https://i.ibb.co/8xY44TD/IMG-1145.png',
+          traits: [
+            { trait_type: 'RARETY', value: 'RARE' },
+            { trait_type: 'POWER', value: 'SUPERVISION' },
+            { trait_type: 'ACCESSORIES', value: 'HAT' }
+          ]
+        },
+        {
+          name: 'Capo dober',
+          image_preview_url: 'https://i.ibb.co/1sS1RdH/IMG-1415.jpg',
+          traits: [
+            { trait_type: 'RARETY', value: 'RARE' },
+            { trait_type: 'POWER', value: 'SUPERVISION' },
+            { trait_type: 'ACCESSORIES', value: 'HAT' }
+          ]
+        },
+        {
+          name: 'Capo dober',
+          image_preview_url: 'https://i.ibb.co/GnFTRYk/IMG-1417.jpg',
+          traits: [
+            { trait_type: 'RARETY', value: 'RARE' },
+            { trait_type: 'POWER', value: 'SUPERVISION' },
+            { trait_type: 'ACCESSORIES', value: 'HAT' }
+          ]
+        }
+      ]; // await getCollectionAssets(DOBERMEN_ADDRESS, DOBERMEN_SLUG);
       setLatestAssets(items);
     };
     getLatestNfts();
@@ -229,11 +257,12 @@ export default function MintCountDown() {
       }
     }
     const labels = {
-      prev: `Minted  ${
+      prev:
+        'Cleopatra Dober' /*  `Minted  ${
         sellOrderSafe ? dayjs(createdDate.toISOString()).fromNow() : 'Last mint'
-      }`,
-      current: `Minted in ${countDown}`,
-      next: `Minted in ${getNextCountDown()}`
+      }` */,
+      current: 'Future Dober', // `Minted in ${countDown}`,
+      next: 'Stoned Dober' // `Minted in ${getNextCountDown()}`
     };
 
     return labels[cardOrder];
@@ -247,21 +276,26 @@ export default function MintCountDown() {
               gutterBottom
               variant="overline"
               align="center"
-              sx={{ color: 'text.secondary', display: 'block' }}
+              sx={{ color: theme.palette.primary.main, display: 'block' }}
             >
-              Latest Mints
+              VIP
             </Typography>
           </MotionInView>
           <MotionInView variants={varFadeInDown}>
-            <Typography variant="h2" align="center" sx={{ color: '#25C369' }}>
-              Next Release in : {countDown}
+            <Typography
+              variant="h2"
+              align="center"
+              sx={{ color: theme.palette.primary.light }}
+            >
+              Most viewed Dobers
+              {/*  Next Release in : {countDown} */}
             </Typography>
           </MotionInView>
         </Box>
 
         <Grid container spacing={isDesktop ? 10 : 5}>
           {latestAssets.map((latestAsset, index) => {
-            let rarety = latestAsset.traits.find(
+            const rarety = latestAsset.traits.find(
               (asset, index) => asset.trait_type === 'RARETY'
             )?.value;
 
@@ -275,7 +309,7 @@ export default function MintCountDown() {
               return <> </>;
             }
 
-            if (index > 0) {
+            /*             if (index > 0) {
               rarety = '????';
               latestAsset.image_preview_url =
                 'https://i.ibb.co/JKLyzmL/2847-01-Artboard-25-2.png';
@@ -285,11 +319,14 @@ export default function MintCountDown() {
             if (index === 2) {
               latestAsset.image_preview_url =
                 'https://i.ibb.co/XXGKTWc/2847-01-Artboard-25-1.png';
-            }
+            } */
             return (
               <Grid key={index} item xs={12} md={4}>
                 <MotionInView variants={varFadeInUp}>
                   <CardStyle
+                    style={{
+                      backgroundColor: 'rgb(245,245,245,0.1)'
+                    }}
                     className={
                       (index === 0 && 'cardLeft') ||
                       (index === 1 && 'cardCenter')
@@ -298,7 +335,7 @@ export default function MintCountDown() {
                     <Typography
                       variant="h5"
                       paragraph
-                      sx={{ color: '#25C369', mt: 2 }}
+                      sx={{ color: theme.palette.primary.lighter, mt: 2 }}
                     >
                       {getCardLabel(index, latestAsset)}
                     </Typography>

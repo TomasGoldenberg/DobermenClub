@@ -123,7 +123,7 @@ export default function LandingRoadmap() {
             <img
               alt="gif"
               style={{ marginRight: '100px' }}
-              src="https://lh3.googleusercontent.com/0AApKfunbYZVIWQH-cCXSp13dI0ZK78q6fm5K6hb0dVvp8kUqxseEqoaIK1AtB05oaQZ0-J80RaUYSVMGlKvSJnPlMBa1I7xPqby5w"
+              src="https://i.ibb.co/hFRdvyb/giphy.gif"
             />
           </Box>
           <ListContainer>
