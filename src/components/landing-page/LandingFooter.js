@@ -19,7 +19,7 @@ export default function LandingFooter() {
         © All rights reserved
         <br /> Made by &nbsp;
         <Link component={RouterLink} to="/auth/login">
-          TheDobermenClub 2021
+          TheDobermenClub 2022
         </Link>
       </Typography>
     </Container>
