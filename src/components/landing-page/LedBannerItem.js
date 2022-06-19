@@ -31,7 +31,7 @@ const LedBannerItem = ({
         style={{
           width: '95%',
           position: 'absolute',
-          zIndex: 99999
+          zIndex: 1000
         }}
       />
       {onlyText ? (
