@@ -1,10 +1,10 @@
 import React from 'react';
 
-const IframeSection = ({ url, isMobile }) => (
+const IframeSection = ({ url, height, width }) => (
   <iframe
-    height={700}
-    style={{ borderColor: 'black' }}
-    width={window.innerWidth}
+    height={height || 700}
+    style={{ borderColor: '#161C24' }}
+    width={width || window.innerWidth}
     src={url}
     title="embeded"
   />

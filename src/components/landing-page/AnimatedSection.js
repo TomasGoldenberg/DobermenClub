@@ -5,6 +5,7 @@ import {
   experimentalStyled as styled
 } from '@material-ui/core/styles';
 import { PATH_HOME } from '../../routes/paths';
+import IframeSection from './IframeSection';
 import 'animate.css';
 
 const AnimatedSection = () => {
@@ -15,14 +16,17 @@ const AnimatedSection = () => {
   return (
     <div
       style={{
-        marginTop: '40px',
-        marginBottom: '40px',
-        justifyContent: 'space-around',
+        background: 'black',
+        marginTop: '0px',
+        marginBottom: '0px',
+        paddingTop: '40px',
+        paddingBottom: '40px',
+        justifyContent: 'space-evenly',
         display: 'flex',
         alignItems: 'center'
       }}
     >
-      <div>
+      {/*       <div>
         <img
           width={300}
           style={{ marginLeft: isMobile ? '0px' : '120px' }}
@@ -35,14 +39,20 @@ const AnimatedSection = () => {
           className="animate__animated animate__pulse animate__infinite"
           src="https://i.ibb.co/WcPwcDw/Untitled-19-1-02-Artboard-2.png"
           alt="basket"
-          width={300}
           style={{
             marginLeft: isMobile ? '0px' : '126px',
             marginTop: '-156px'
           }}
+          width={300}
           height={250}
         />
       </div>
+ */}
+      <IframeSection
+        width={300}
+        height={300}
+        url="https://ping-pong-gules.vercel.app/"
+      />
 
       <div>
         <h1 style={{ marginBottom: '20px', fontWeight: 'bold' }}>
