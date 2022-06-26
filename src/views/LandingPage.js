@@ -14,7 +14,7 @@ import {
   NextMilestone,
   LandingDarkMode,
   LandingAdvertisement,
-  LandingRoadmap,
+  IframeSection,
   LandingHugePackElements,
   PhotoSection,
   AnimatedSection
@@ -135,7 +135,7 @@ export default function LandingPage() {
         <AnimatedSection />
 
         <PhotoSection image="https://i.ibb.co/mC0c2Hv/subhero.jpg" />
-
+        <IframeSection url="https://dober-gallery.vercel.app/" />
         <div
           style={{
             backgroundImage: `url("https://i.ibb.co/y0ScCQG/Untitled-19-09-Artboard-11.png")`,
