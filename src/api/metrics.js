@@ -1,12 +1,14 @@
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
-import { firebaseConfig } from '../config';
 import { getIpLocation } from '../utils/getIpLocation';
 import { handleZeros, validateSearchTimeUnit } from '../utils/formatDate';
 import { MONTHS } from '../constants/dates';
+import { firebaseConfig } from '../config';
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 export const LOGnewVisit = async (ip, promoterId, tokenId, type) => {
   const parsedIp = ip.replace(/\./g, '');
   const newMetricsRef = firebase.database().ref(`/metrics/${type}/${parsedIp}`);
