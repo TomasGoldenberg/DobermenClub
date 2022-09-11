@@ -10,7 +10,6 @@ function Example() {
   useEffect(() => {
     const getLatestNews = async () => {
       const news = await getNews();
-
       setItems(news);
     };
     getLatestNews();
