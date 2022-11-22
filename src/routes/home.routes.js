@@ -14,15 +14,16 @@ const HomeRoutes = {
       path: '/',
       component: lazy(() => import('../views/LandingPage'))
     },
-    {
-      exact: true,
-      path: '/upload',
-      component: lazy(() => import('../views/UploadsPage'))
-    },
+
     {
       exact: true,
       path: '/manage-news',
       component: lazy(() => import('../views/ManageNews'))
+    },
+    {
+      exact: true,
+      path: '/gallery',
+      component: lazy(() => import('../views/Gallery'))
     },
 
     // ----------------------------------------------------------------------

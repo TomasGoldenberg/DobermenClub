@@ -30,7 +30,6 @@ export default function App() {
             <RtlLayout>
               <NotistackProvider>
                 <Router history={history}>
-                  <Settings />
                   <ScrollToTop />
                   {renderRoutes(routes)}
                 </Router>

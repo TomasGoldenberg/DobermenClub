@@ -70,7 +70,17 @@ const UploadsPage = () => {
       <Container maxWidth="x1" sx={{ mt: 13 }}>
         <Grid container spacing={2}>
           {loading ? (
-            <CircularProgress />
+            <div
+              style={{
+                height: '100vh',
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <CircularProgress />
+            </div>
           ) : (
             <Grid item xs={12}>
               <TextField

@@ -139,7 +139,7 @@ export default function LandingPage() {
     <RootStyle title="DobermenClub | NFT COLLECTION" id="move_top">
       <ContentStyle>
         <PhotoSection image="https://i.ibb.co/DRS8xd8/IMG-1396.jpg" />
-        <Carrousel />
+        {/*      <Carrousel /> */}
         <AnimatedSection />
         <PhotoSection image="https://i.ibb.co/mC0c2Hv/subhero.jpg" />
         <IframeSection url="https://dober-gallery.vercel.app/" />

@@ -9,6 +9,7 @@ import LoadingScreen from '../components/LoadingScreen';
 import DashboardRoutes from './dashboard.routes';
 import HomeRoutes from './home.routes';
 import AuthRoutes from './auth.routes';
+import DoberlandRoutes from './doberland.routes';
 import ExternalsRoutes from './external.routes';
 // ----------------------------------------------------------------------
 
@@ -107,6 +108,7 @@ const routes = [
   DashboardRoutes,
 
   // Home Routes
+  DoberlandRoutes,
   HomeRoutes
 ];
 

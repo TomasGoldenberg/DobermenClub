@@ -63,7 +63,8 @@ const UploadsPage = () => {
                   sx={{
                     display: 'flex',
                     width: '100%',
-                    justifyContent: 'space-between'
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
                   }}
                 >
                   <img alt="item" src={item.imageThumb} />
