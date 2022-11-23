@@ -13,7 +13,7 @@ import { LOGnewVisit } from '../api/metrics';
 import { getSectionContent } from '../api/contents';
 import 'animate.css';
 import { PATH_DOBERLAND } from '../routes/paths';
-import Footer from '../components/landing-page/LandingFooter';
+import Footer from '../components/doberland/FooterDoberland';
 
 const publicIp = require('public-ip');
 
@@ -21,11 +21,6 @@ const RootStyle = styled(Page)({
   height: '100%'
 });
 const StyledImg = styled('img')({
-  height: '100vh'
-});
-const StyledButton = styled(Button)({
-  position: 'absolute',
-  top: '70%',
   width: '100%'
 });
 
@@ -47,11 +42,30 @@ const DoberlandPage = () => {
     logMetric();
   }, []);
 
+  const StyledButton = styled(Button)(
+    isMobile
+      ? {
+          position: 'absolute',
+          width: '100%'
+        }
+      : {
+          position: 'absolute',
+          top: '25%',
+          left: '66%',
+          width: '30%',
+          padding: '21px'
+        }
+  );
+
   return (
     <RootStyle title="DOBERLAND 3.0 | NFT COLLECTION">
       <Grid>
         <StyledImg
-          src="https://i.ibb.co/BjQWFpL/3436-01-Artboard-4-2.png"
+          src={
+            isMobile
+              ? 'https://i.ibb.co/j3NhyF5/3436-02-Artboard-6.png'
+              : 'https://i.ibb.co/LnjRdZn/IMG-3198.png'
+          }
           alt="background"
         />
         <StyledButton
@@ -60,7 +74,7 @@ const DoberlandPage = () => {
           }}
           variant="contained"
         >
-          Enter
+          ENTER
         </StyledButton>
       </Grid>
       <Footer />

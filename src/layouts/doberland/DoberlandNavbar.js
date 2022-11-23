@@ -165,7 +165,11 @@ export default function HomeNavbar() {
 
           <Hidden mdDown>{renderMenuDesktop}</Hidden>
 
-          <Button variant="contained" target="_blank" href={PATH_HOME.purchase}>
+          <Button
+            variant="contained"
+            target="_blank"
+            href={PATH_DOBERLAND.purchase}
+          >
             Buy on Opensea
           </Button>
         </Container>

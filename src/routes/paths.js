@@ -54,5 +54,6 @@ export const PATH_EXTERNALS = {
 export const PATH_DOBERLAND = {
   root: ROOT_DOBERLAND,
   home: path(ROOT_DOBERLAND, '/home'),
-  castle: path(ROOT_DOBERLAND, '/castle')
+  castle: path(ROOT_DOBERLAND, '/castle'),
+  purchase: 'https://opensea.io/collection/the-cdd'
 };

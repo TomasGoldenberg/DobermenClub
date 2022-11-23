@@ -5,16 +5,16 @@ import {
 } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 
-const StyledImg = styled('img')({
-  height: '80vh',
-  width: `${window.innerWidth / 3}px`,
-  marginTop: '12px',
-  backgroundRepeat: 'no-repeat'
-});
-
-const InfoDoor = ({ section, setSectionText }) => {
+const InfoDoor = ({ section, setSectionText, isMobile }) => {
   const doorImg =
     'https://i.ibb.co/LCNBKHc/2112-w032-n003-246-B-p1-246-02-Artboard-3-1.png';
+
+  const StyledImg = styled('img')({
+    height: '80vh',
+    width: isMobile ? '100%' : `${window.innerWidth / 3}px`,
+    marginTop: '12px',
+    backgroundRepeat: 'no-repeat'
+  });
 
   return (
     <div style={{ position: 'relative' }}>
