@@ -5,6 +5,7 @@ function path(root, sublink) {
 }
 const ROOTS_AUTH = '/auth';
 const ROOTS_EXTERNALS = '/offers';
+const ROOT_DOBERLAND = '/doberland';
 
 const ROOTS_DASHBOARD = '/dashboard';
 
@@ -48,4 +49,11 @@ export const PATH_EXTERNALS = {
   externals: {
     productOffer: path(ROOTS_EXTERNALS, '/:promoterId/:tokenId')
   }
+};
+
+export const PATH_DOBERLAND = {
+  root: ROOT_DOBERLAND,
+  home: path(ROOT_DOBERLAND, '/home'),
+  castle: path(ROOT_DOBERLAND, '/castle'),
+  purchase: 'https://opensea.io/collection/the-cdd'
 };
